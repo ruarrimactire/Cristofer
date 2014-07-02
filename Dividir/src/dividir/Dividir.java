@@ -22,22 +22,39 @@ public class Dividir {
     public static void main(String[] args) {
         // TODO code application logic here
         
-    double x = 0;
-    double z = 0;
-    
-    System.out.println ("Por favor, introduce dos numeros.");
-    
-    try {
-            BufferedReader leer = new BufferedReader (new InputStreamReader (System.in));
-            x = Double.parseDouble (leer.readLine());
-    } catch (IOException e) {}
-    
-    try {
-            BufferedReader leer = new BufferedReader (new InputStreamReader (System.in));
-            z = Double.parseDouble (leer.readLine());
-    } catch (IOException e) {}
-    
-    System.out.println ("A continuación se muestra el resultado de la division "+(x/z) );
+        String numero = new String();
+        double x = 0;
+        double z = 0;
+
+        System.out.println ("Por favor, introduce el primer numero.");
+        do{
+            try {
+                BufferedReader leer = new BufferedReader (new InputStreamReader (System.in));
+                numero = leer.readLine();
+            } catch (IOException e) {}
+        }while(!isDoubleNumber(numero));
+        x = Double.parseDouble(numero);
+
+        System.out.println ("Por favor, introduce el segundo numero.");
+        do{
+            try {
+                BufferedReader leer = new BufferedReader (new InputStreamReader (System.in));
+                numero = leer.readLine();
+            } catch (IOException e) {}
+        }while(!isDoubleNumber(numero));
+        z = Double.parseDouble(numero);
+
+        System.out.println ("A continuación se muestra el resultado de la division "+(x/z) );
+    }
+  
+    public static boolean isDoubleNumber(String numero) {
+
+        try {
+            Double.parseDouble(numero);
+            return true;
+            }
+        catch(Exception e){return false;}
+
     }
     
 }
