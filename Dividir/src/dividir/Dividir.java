@@ -27,24 +27,26 @@ public class Dividir {
         double z = 0;
 
         System.out.println ("Por favor, introduce el primer numero.");
-        numero = leerLinea();
-        while(!isDoubleNumber(numero)) {
-            System.out.println ("Por favor, vuelve a intentarlo");
-            numero = leerLinea();
-        }
+        numero = leerDouble();
         x = Double.parseDouble(numero);
 
         System.out.println ("Por favor, introduce el segundo numero.");
-        numero = leerLinea();
-        while(!isDoubleNumber(numero)) {
-            System.out.println ("Por favor, vuelve a intentarlo");
-            numero = leerLinea();
-        }
+        numero = leerDouble();
         z = Double.parseDouble(numero);
 
         System.out.println ("A continuación se muestra el resultado de la division "+(x/z) );
     }
   
+    public static String leerDouble () {
+        String numero = new String ();
+        numero = leerLinea();
+        while(!isDoubleNumber(numero)) {
+            System.out.println ("Por favor, vuelve a intentarlo");
+            numero = leerLinea();
+        }
+        return numero;
+    }
+    
     public static String leerLinea () {
         String numero = new String();
         try {
