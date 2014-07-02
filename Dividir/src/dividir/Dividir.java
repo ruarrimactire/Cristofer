@@ -22,29 +22,28 @@ public class Dividir {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        String numero = new String();
         double x = 0;
         double z = 0;
 
         System.out.println ("Por favor, introduce el primer numero.");
-        numero = leerDouble();
-        x = Double.parseDouble(numero);
+        x = leerDouble();
 
         System.out.println ("Por favor, introduce el segundo numero.");
-        numero = leerDouble();
-        z = Double.parseDouble(numero);
+        z = leerDouble();
 
         System.out.println ("A continuación se muestra el resultado de la division "+(x/z) );
     }
   
-    public static String leerDouble () {
+    public static double leerDouble () {
+        double x = 0;
         String numero = new String ();
         numero = leerLinea();
         while(!isDoubleNumber(numero)) {
             System.out.println ("Por favor, vuelve a intentarlo");
             numero = leerLinea();
         }
-        return numero;
+        x = Double.parseDouble(numero);
+        return x;
     }
     
     public static String leerLinea () {
