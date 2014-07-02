@@ -6,9 +6,6 @@
 
 package letrascomunes;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  *
@@ -31,55 +28,28 @@ public class LetrasComunes {
         String palabra2 = new String ();
 
         System.out.println ("Por favor, introduce la primera palabra.");
-        palabra1 = leerLinea();
+        palabra1 = usoComun.leerLinea();
 
         System.out.println ("Por favor, introduce la segunda palabra.");
-        palabra2 = leerLinea();
+        palabra2 = usoComun.leerLinea();
 
         System.out.println ("A continuación se muestran las letras comunes ");
 
+        /** length() metodo de la clase String, que devuelve la longitud de una 
+         *      cadena. 
+         *  charAt(int i) metodo de la clase String, devuelve el caracter que se
+         *      emcuentra en la posición i.
+         *  substring(int inicio, int fin) metodo de la clase String que permite
+         *      de extraer una subcadena desde un punto inicial hasta un punto
+         *      final.
+         */
         for (int i = 0; i < palabra1.length(); i++) {
             for (int x = 0; x < palabra2.length(); x++) { 
                 if (palabra1.charAt(i) == palabra2.charAt (x)){
-                    System.out.println( palabra2.charAt (x) );
+                    System.out.println( palabra2.substring(x, x+1)) ;
                 }
             }    
         }
-    }
-    
-    // Comprueba que lo introducido sea un valor válido y de no ser así envía un mensaje de error.
-    public static double leerDouble () {
-        double x = 0;
-        String numero = new String ();
-        numero = leerLinea();
-        while(!isDoubleNumber(numero)) {
-            System.out.println ("Por favor, vuelve a intentarlo");
-            numero = leerLinea();
-        }
-        x = Double.parseDouble(numero);
-        return x;
-    }
-    
-    // Metodo que pide al usuario introducir datos.
-    public static String leerLinea () {
-        String numero = new String();
-        try {
-                BufferedReader leer = new BufferedReader (new InputStreamReader (System.in));
-                numero = leer.readLine();
-            } catch (IOException e) {}
-        return numero;
-    }
-    
-    // Metodo que comprueba que lo introducido sea un numero.
-    public static boolean isDoubleNumber(String numero) {
-
-        try {
-            Double.parseDouble(numero);
-            return true;
-            }
-        catch(Exception e){return false;}
-
-    }
-    
+    }    
 }
 
