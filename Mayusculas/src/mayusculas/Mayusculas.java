@@ -6,6 +6,9 @@
 
 package mayusculas;
 
+import java.util.ArrayList;
+import java.util.*;
+
 /**
  *
  * @author Risto
@@ -21,10 +24,8 @@ public class Mayusculas {
         System.out.println ("Por favor, introduzca su nombre y apellido.");
         String nombre = usoComun.leerLinea();
         
-        String [] letras = new String [20];
-        for (int i = 0; i<20; i++){
-            letras[i] = new String();
-        }
+        List<String> letras = new ArrayList<String>();
+        
         /**
          * En un string no se pueden modificar los elementos, solo añadir mas.
          * Un array separa la cadena en celdas y se pueden modificar los elementos.
@@ -35,21 +36,26 @@ public class Mayusculas {
                 continue;
             }
             else {
+                String temp = "";
                 while (i< nombre.length() && nombre.charAt(i) != ' ' && 
                         nombre.charAt(i) != '\t' ){
-                    letras[j] += nombre.charAt(i);
+                    temp += nombre.charAt(i);
                     i++;
                 }
+                letras.add(temp);
                 j++;
             }
         }
         
-        System.out.println("dimension del array letras: " + letras.length);
+        String[] arrayLetras = new String[letras.size()];
+        letras.toArray(arrayLetras);
+        
+        System.out.println("dimension del array letras: " + arrayLetras.length);
         System.out.println("celdas rellenadas del array letras: " + j);
         
-        for (int i = 0; i < j; i++ ){
-            System.out.print( letras[i].substring(0,1).toUpperCase() +
-                    letras[i].substring(1).toLowerCase() + " " );
+        for (int i = 0; i < arrayLetras.length; i++ ){
+            System.out.print( arrayLetras[i].substring(0,1).toUpperCase() +
+                    arrayLetras[i].substring(1).toLowerCase() + " " );
         }
         System.out.print('\n');
         
