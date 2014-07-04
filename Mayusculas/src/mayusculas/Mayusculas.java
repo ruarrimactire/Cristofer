@@ -6,7 +6,6 @@
 
 package mayusculas;
 
-import java.util.ArrayList;
 import java.util.*;
 
 /**
@@ -23,7 +22,7 @@ public class Mayusculas {
         
         System.out.println ("Por favor, introduzca su nombre y apellido.");
         String nombre = usoComun.leerLinea();
-        
+        // Aqui se declara un variante del tipo array.
         List<String> letras = new ArrayList<String>();
         
         /**
@@ -36,6 +35,11 @@ public class Mayusculas {
                 continue;
             }
             else {
+/** arrayList no se puede apuntar de la manera normal con [], por eso se utiliza
+         un String temporal, que al estar declarado dentro del else, se borrara
+         cada vez que se acabe el else. Esto sirve para ver el concepto de alcance
+         y visivilidad de variables.
+**/
                 String temp = "";
                 while (i< nombre.length() && nombre.charAt(i) != ' ' && 
                         nombre.charAt(i) != '\t' ){
@@ -46,12 +50,15 @@ public class Mayusculas {
                 j++;
             }
         }
-        
+        /**
+         * El arrayList se puede modificar la longitud y añadir cosas nuevas.
+         */
         String[] arrayLetras = new String[letras.size()];
         letras.toArray(arrayLetras);
         
         System.out.println("dimension del array letras: " + arrayLetras.length);
         System.out.println("celdas rellenadas del array letras: " + j);
+        // La longitud del arrayLetras coincide con j.
         
         for (int i = 0; i < arrayLetras.length; i++ ){
             System.out.print( arrayLetras[i].substring(0,1).toUpperCase() +
