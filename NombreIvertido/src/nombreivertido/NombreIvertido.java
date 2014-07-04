@@ -26,7 +26,16 @@ public class NombreIvertido {
         for (int i = (nombre.length()-1); i >= 0; i--){
             invertido += nombre.substring(i,i+1);
         }
-    System.out.println ("A continuacion se muestra su nombre al reves: \n" + invertido); 
+        
+        System.out.println ("A continuacion se muestra su nombre al reves: \n" + invertido); 
+        
+        System.out.println ("A continuacion se muestra su nombre con saltos de letra: \n");
+        for (int i = 0; i < nombre.length(); i+=2){
+            System.out.print(nombre.charAt(i));
+        }
+        System.out.println ("");
+        System.out.print ("\n");
+        
     }
     
 }
