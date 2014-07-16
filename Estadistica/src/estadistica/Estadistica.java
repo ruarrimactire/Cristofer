@@ -53,36 +53,16 @@ public class Estadistica {
                     break;
 
                 case 2:
-                    {float resultado = 0;
-                        for (int i = 0; i < numeros.size(); i++) {
-                            resultado += numeros.get(i);
-                        }
-                        System.out.println("A continuacion se mostrara la media \n" + resultado/numeros.size());
-                    }   
+                    System.out.println("A continuacion se mostrara la media \n" + suma(numeros)/numeros.size());  
                     break;
 
                 case 3:
-                    {float resultado = 0;
-                        for (int i = 0; i < numeros.size(); i++) {
-                            resultado += numeros.get(i);
-                        }
-                        System.out.println("A continuacion se mostrara la suma \n" + resultado);
-                    }
+                        System.out.println("A continuacion se mostrara la suma \n" + suma(numeros) );
                     break;
 
                 case 4:
-                    {float resultado = 0;
-                        for (int i = 0; i < numeros.size(); i++) {
-                            resultado += numeros.get(i);
-                        }
-                        resultado /= numeros.size();
-                        float resultado2 = 0;
-                        for (int i = 0; i < numeros.size(); i++){
-                            resultado2 += Math.pow(resultado-numeros.get(i),2);
-                        }
-                        System.out.println("A continuacion se mostrara la desviacion estandar \n"
-                                + Math.sqrt(resultado2/numeros.size()) );
-                    }    
+                    System.out.println("A continuacion se mostrara la desviacion estandar \n"
+                            + Math.sqrt(sumaErrores(numeros, suma(numeros)/numeros.size())/numeros.size()) );
                     break;
 
                 case 5:
@@ -98,17 +78,35 @@ public class Estadistica {
 
             }
             
-            System.out.println("pulse envio ...");
-            try {
-                System.in.read();
-            } catch (IOException ex) {
-                Logger.getLogger(Estadistica.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.print("\u001b[2J");
-            System.out.flush();
+//            System.out.println("pulse envio ...");
+//            try {
+//                System.in.read();
+//            } catch (IOException ex) {
+//                Logger.getLogger(Estadistica.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            System.out.print("\u001b[2J");
+//            System.out.flush();
+            System.out.println();
+            System.out.println();
             
         }
+    } 
+    
+    
+    public static float suma( List<Float> datos ){
+        float resultado = 0;
+        for (int i = 0; i < datos.size(); i++) {
+            resultado += datos.get(i);
+        }
+        return resultado;
     }
     
     
+    public static float sumaErrores( List<Float> datos, float referencia){
+        float resultado = 0;
+        for (int i = 0; i < datos.size(); i++) {
+            resultado += Math.pow(referencia - datos.get(i),2);
+        }
+        return resultado;
+    }
 }
