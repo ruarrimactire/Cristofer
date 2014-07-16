@@ -53,16 +53,17 @@ public class Estadistica {
                     break;
 
                 case 2:
-                    System.out.println("A continuacion se mostrara la media \n" + suma(numeros)/numeros.size());  
+                    System.out.println("A continuacion se mostrara la media \n" + sumaErrores(numeros, 0 ,1)/numeros.size());  
                     break;
 
                 case 3:
-                        System.out.println("A continuacion se mostrara la suma \n" + suma(numeros) );
+                        System.out.println("A continuacion se mostrara la suma \n" + sumaErrores(numeros, 0 ,1) );
                     break;
 
                 case 4:
                     System.out.println("A continuacion se mostrara la desviacion estandar \n"
-                            + Math.sqrt(sumaErrores(numeros, suma(numeros)/numeros.size())/numeros.size()) );
+                            + Math.sqrt( sumaErrores(numeros, sumaErrores(numeros, 0 ,1)/numeros.size(),2) / numeros.size() ) 
+                    );
                     break;
 
                 case 5:
@@ -90,23 +91,14 @@ public class Estadistica {
             System.out.println();
             
         }
-    } 
+    }
     
-    
-    public static float suma( List<Float> datos ){
+    public static float sumaErrores( List<Float> datos, float referencia, float potencia){
         float resultado = 0;
         for (int i = 0; i < datos.size(); i++) {
-            resultado += datos.get(i);
+            resultado += Math.pow( datos.get(i) - referencia, potencia);
         }
         return resultado;
     }
     
-    
-    public static float sumaErrores( List<Float> datos, float referencia){
-        float resultado = 0;
-        for (int i = 0; i < datos.size(); i++) {
-            resultado += Math.pow(referencia - datos.get(i),2);
-        }
-        return resultado;
-    }
 }
