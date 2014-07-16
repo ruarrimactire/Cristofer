@@ -6,6 +6,10 @@
 
 package estadistica;
 
+import java.io.IOException;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import usoComun.*;
 
 /**
@@ -20,6 +24,8 @@ public class Estadistica {
     public static void main(String[] args) {
         // TODO code application logic here
     
+        List<Float> numeros = new ArrayList<Float>();
+        
         while(1 == 1){
             int opcion;
             do{
@@ -30,7 +36,9 @@ public class Estadistica {
                 System.out.println("5. Imprimir lista de datos.");
                 System.out.println("0. Salir del programa.");
                 opcion = (int)usoComun.leerDouble();
-            }while(opcion<=5 && opcion >= 0);
+            }while( !(opcion <= 5 && opcion >= 0) );
+            
+            // System.out.println("Opción " + opcion);
             
             /**
              * switch se usa para establecer las opciones del menu.
@@ -40,26 +48,65 @@ public class Estadistica {
              */
             switch (opcion){
                 case 1:
-                    
+                    System.out.println("Introduzca un número");
+                    numeros.add((float)usoComun.leerDouble());
                     break;
 
                 case 2:
+                    System.out.println("A continuacion se mostrara la media \n" + suma(numeros)/numeros.size());  
                     break;
 
                 case 3:
+                        System.out.println("A continuacion se mostrara la suma \n" + suma(numeros) );
                     break;
 
                 case 4:
+                    System.out.println("A continuacion se mostrara la desviacion estandar \n"
+                            + Math.sqrt(sumaErrores(numeros, suma(numeros)/numeros.size())/numeros.size()) );
                     break;
 
                 case 5:
+                    {float resultado = 0;
+                        for (int i = 0; i < numeros.size(); i++) {
+                            System.out.println( numeros.get(i));
+                        }
+                    }
                     break;
 
                 case 0:
                     return;
 
             }
+            
+//            System.out.println("pulse envio ...");
+//            try {
+//                System.in.read();
+//            } catch (IOException ex) {
+//                Logger.getLogger(Estadistica.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            System.out.print("\u001b[2J");
+//            System.out.flush();
+            System.out.println();
+            System.out.println();
+            
         }
+    } 
+    
+    
+    public static float suma( List<Float> datos ){
+        float resultado = 0;
+        for (int i = 0; i < datos.size(); i++) {
+            resultado += datos.get(i);
+        }
+        return resultado;
     }
     
+    
+    public static float sumaErrores( List<Float> datos, float referencia){
+        float resultado = 0;
+        for (int i = 0; i < datos.size(); i++) {
+            resultado += Math.pow(referencia - datos.get(i),2);
+        }
+        return resultado;
+    }
 }
