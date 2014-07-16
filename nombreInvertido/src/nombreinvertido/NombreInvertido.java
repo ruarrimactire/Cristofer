@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package nombreivertido;
+package nombreinvertido;
 
 import usoComun.*;
 
@@ -12,7 +12,7 @@ import usoComun.*;
  *
  * @author Risto
  */
-public class NombreIvertido {
+public class NombreInvertido {
 
     /**
      * @param args the command line arguments
