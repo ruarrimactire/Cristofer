@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 
+
 package recursividad;
 
 import usoComun.usoComun;
+import java.lang.*;
+
 
 /**
  *
@@ -30,62 +33,109 @@ public class Recursividad {
         frase = frase.toLowerCase();
         palabra = palabra.toLowerCase();
         
-        System.out.println("La palabra '" + palabra + "' Esta incluida en '" + frase + "' " + numera(frase, palabra) + " veces.");
+        System.out.println("La palabra '" + palabra + "' Está incluida en '" + frase + "' " + numera(frase, palabra) + " veces.");
     }
-    
+        
     public static int numera( String referencia, String comparacion ) {
-        int [] removidas = new int[0];
-        char [] remLetras = new char[0];
-        
-        return numera(referencia, comparacion, removidas, 0, remLetras);
-        
+        lista ref = new lista(referencia);        
+        return numera(ref, comparacion, 0 );        
     }
 
-    public static int numera( String referencia, String comparacion, int[] removidas, int n, char[] remLetras ) {
-        
-        if (referencia.length() != comparacion.length()) {
-            
+    public static int numera( lista referencia, String comparacion, int n ) {
+        if (referencia.dimension > comparacion.length()) {  
             int count = 0;
-            int[] removidas2 = new int[removidas.length+1];
-            for (int i = 0; i < removidas.length; i++){
-                removidas2[i] = removidas[i];
-            }
-            
-            char[] remLetras2 = new char[remLetras.length+1];
-            for (int i = 0; i < remLetras.length; i++){
-                remLetras2[i] = remLetras[i];
-            }
-            
-            for (int i = n ; i < referencia.length() ; i++) {
-                removidas2[ removidas2.length-1 ] = i+removidas.length;
-                remLetras2[ remLetras2.length-1 ] = referencia.charAt(i);
-                
-                count += numera( referencia.substring(0, i) + referencia.substring(i+1), comparacion, removidas2, i, remLetras2);
+            for (int i = n ; i < referencia.dimension ; i++) {
+                count += numera( referencia.remove(i), comparacion, i );
             }
             return count;
-        }
-        else {
-            if (referencia.equals(comparacion)){
-                for (int k = 0 ; k < remLetras.length ; k++) {
-                    System.out.print(remLetras[k] + "  "); 
-                }
-                System.out.println();
-
-                for (int k = 0 ; k < removidas.length ; k++) {
-                    String format = String.format("%%0%dd", 2);
-                    String result = String.format(format, removidas[k]);
-                    System.out.print(result + " "); 
-                }
-                System.out.println();
-                System.out.println();
-
+        } else {
+            if ( comparacion.equals(referencia.getString()) ) {
+                System.out.println(referencia.getPositions());
                 return 1;
             }
             else {
                 return 0;
             }
-            
         }
+    }
+    
+}
+
+class lista {
+    public char[] letras   ;
+    public int[]  posicion ;
+    public int dimension;
+
+    lista(int dim){
+        letras = new char[dim];
+        posicion = new int[dim];
+        dimension = dim;
+    }
+
+    lista(String frase){
+        letras = new char[frase.length()];
+        posicion = new int[frase.length()];
+        dimension = frase.length();
+
+        for(int i = 0; i < frase.length(); i++) {
+            letras[i] = frase.charAt(i);
+            posicion[i] = i+1;
+        }
+    }
+
+    public lista subLista (int inicio, int fine) {
+        lista nuova = new lista(fine-inicio+1);
+        
+        for(int i = inicio ; i < fine; i++){
+            nuova.letras[i] = letras[i];
+            nuova.posicion[i] = posicion[i];
+        }
+
+        return nuova;
+    }
+    
+    public lista subLista (int inicio) {
+        return subLista(inicio, dimension-1);
+    }
+    
+    public lista add (lista addendum) {
+        lista nueva = new lista(dimension+addendum.dimension);
+        // implementare
+        
+        return nueva;
+    }
+
+    public lista remove (int element) {
+        lista nueva = new lista(dimension-1);
+
+        for(int i = 0; i < element; i++){
+            nueva.letras [i] = letras[i];
+            nueva.posicion[i] = posicion[i];
+        }
+        for(int i = element+1; i < dimension; i++){
+            nueva.letras[i-1] = letras[i];
+            nueva.posicion[i-1] = posicion[i];
+        }
+        
+        return nueva;
+    }
+
+    public String getPositions () {
+        String temp = new String();
+            for (int k = 0 ; k < posicion.length ; k++) {
+                String format = String.format("%%0%dd", 2);
+                String result = String.format(format, posicion[k]);
+                temp += result + " ";
+            }
+        return temp;
+    }
+
+    public String getString () {
+        String temp = new String();
+            for (int k = 0 ; k < letras.length ; k++) {
+                temp += letras[k];
+            }
+        return temp;
     }
 }
 
