@@ -43,11 +43,16 @@ public class BuscaPalabras {
 
                 case 2:
                     System.out.println("Por favor, introduzca una palabra y se comprobara si esta en la lista.");
+                    /**
+                    * El flag toma un "apunte" dentro de un bucle cuando pasa algo 
+                    * que halla que evaluar mas tarde.
+                    */
                     boolean flag = false;
                     String buscar = usoComun.leerLinea();
                     for(int i = 0; i < palabras.size(); i++){
+                        // el metodo objeto.equals comprueba similitudes entre dos strings.
                         if (buscar.equals(palabras.get(i))){
-                            System.out.println("Su palabra ya esta en la lista en la posición: " + i+1);
+                            System.out.println("Su palabra ya esta en la lista en la posición: " + (i+1) );
                             flag = true;
                         }
                     }
