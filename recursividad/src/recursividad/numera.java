@@ -11,7 +11,7 @@ package recursividad;
  * @author Filippo
  */
 public class numera {
-        public static int numera( String referencia, String comparacion ) {
+    public static int numera( String referencia, String comparacion ) {
         lista ref = new lista(referencia);        
         return numera(ref, comparacion, 0 );        
     }
@@ -27,7 +27,8 @@ public class numera {
         if (referencia.dimension() > comparacion.length()) {  
             int count = 0;
             for (int i = n ; i < referencia.dimension() ; i++) {
-                count += numera( referencia.remove(i), comparacion, i );
+                count += numera( referencia.subLista(0, i).add(referencia.subLista(i+1)) , comparacion, i );
+//                count += numera( referencia.remove(i), comparacion, i );
             }
             return count;
         } else {
@@ -71,24 +72,33 @@ class lista {
     }
 
     public lista subLista (int inicio, int fine) {
-        lista nueva = new lista(fine-inicio+1);
+        lista nueva = new lista(fine-inicio);
         
         for(int i = inicio ; i < fine; i++){
-            nueva.letras[i] = letras[i];
-            nueva.posicion[i] = posicion[i];
+            nueva.letras[i-inicio] = letras[i];
+            nueva.posicion[i-inicio] = posicion[i];
         }
 
         return nueva;
     }
     
     public lista subLista (int inicio) {
-        return subLista(inicio, dimension-1);
+        return subLista(inicio, dimension);
     }
     
     public lista add (lista addendum) {
         lista nueva = new lista(dimension+addendum.dimension);
-        // implementare
         
+        int i;
+        for (i = 0; i < dimension ; i++) {
+            nueva.letras[i] = letras[i];
+            nueva.posicion[i] = posicion[i];
+        }
+        
+        for (int j=0 ; j < addendum.dimension ; j++) {
+            nueva.letras[i+j] = addendum.letras[j];
+            nueva.posicion[i+j] = addendum.posicion[j];
+        }
         return nueva;
     }
 
