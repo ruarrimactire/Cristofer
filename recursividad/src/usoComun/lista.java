@@ -56,13 +56,13 @@ public class lista {
        return nueva;
    }
    // Este metodo devuelve un String con los numeros de las posiciones formateados.
-    public String getPosiciones(){
+    public String getPosiciones(int espacios){
         String temp = new String();
         for (int i = 0; i < dimension; i++){
             /** Este String.format(); modifica la cadena "%%0%dd" de manera
              * que vaya a sustituir [%%]0[%d]d con %02d
              */
-            String format = String.format("%%0%dd", 2);
+            String format = String.format("%%-%dd", espacios);
             /** Para hacer que un numero sea imprimido con minimo dos
             * caracteres y que vaya rellenando de 0 a la izquierda, hay
             * que utilizar, el metodo String.format(); que tomara como
@@ -72,24 +72,16 @@ public class lista {
             * docs.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html#syntax
             */
             String result = String.format(format, posicion[i]);
-            temp += result + " ";       
+            temp += result;       
         }
         return temp;
     }
    // Este metodo devuelve un String con el contenido de las letras.
-    public String getString(){
+    public String getString(int espacios){
         String temp = new String();
         for (int i = 0; i < dimension; i++){
             temp += letras[i];
-        }
-        return temp;
-    }
-
-    public String getString2(){
-        String temp = new String();
-        for (int i = 0; i < dimension; i++){
-            temp += letras[i];
-            for(int j = 0 ; j < 3; j++){
+            for(int j = 0 ; j < espacios-1; j++){
                 temp += " ";
             }
         }

@@ -20,8 +20,8 @@ public class Recursividad {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String frase = new String();
-        String palabra = new String();
+        String frase;
+        String palabra;
         
         System.out.println("Por favor, introduzca una frase.");
         frase = usoComun.leerLinea();
@@ -31,6 +31,12 @@ public class Recursividad {
         frase = frase.toLowerCase();
         palabra = palabra.toLowerCase();
         
-        System.out.println("La palabra '" + palabra + "' Esta incluida en '" + frase + "' " + numera.numera(frase, palabra) + " veces.");
+        System.out.println("La palabra '" 
+            + palabra 
+            + "' Esta incluida en '" 
+            + frase 
+            + "' " 
+            + numera.numera(frase, palabra) 
+            + " veces.");
     }
 }
