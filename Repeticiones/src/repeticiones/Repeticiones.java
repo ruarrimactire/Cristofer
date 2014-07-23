@@ -26,7 +26,9 @@ public class Repeticiones {
         System.out.println("Por favor introduce el numero de veces que quieres que se repita tu nombre.");
         repeticiones = ((int)usoComun.leerDouble());
         
-            
+            for (int i = 0; i < repeticiones; i++){
+                System.out.println("Esta es la repeticion numero " + (i+1) + " " + nombre);
+            }
         
         System.out.println(nombre);
     }
