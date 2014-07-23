@@ -20,13 +20,14 @@ public class lista {
     public int dimension(){
        return dimension;
    }
-   
+    // Este metodo inicializa las variables en una lista vacia.
    lista(int dim){
        letras = new char [dim];
        posicion = new int [dim];
        dimension = dim;
    }
    
+    // Este metodo inicializa una lista con la frase que se introduce.
    lista(String frase){
        letras = new char [frase.length()];
        posicion = new int [frase.length()];
@@ -35,10 +36,10 @@ public class lista {
        for (int i = 0; i < frase.length(); i++){
            letras[i] = frase.charAt(i);
            posicion[i] = i+1;
-       }
-       
+       }   
    }
-   
+   // Este metodo es el que se encarga de remover las letras y añadir el resultado
+   // a la nueva lista.
    public lista remove(int columna){
        lista nueva = new lista(dimension-1);
        
@@ -54,7 +55,7 @@ public class lista {
        
        return nueva;
    }
-   
+   // Este metodo devuelve un String con los numeros de las posiciones formateados.
     public String getPosiciones(){
         String temp = new String();
         for (int i = 0; i < dimension; i++){
@@ -75,7 +76,7 @@ public class lista {
         }
         return temp;
     }
-   
+   // Este metodo devuelve un String con el contenido de las letras.
     public String getString(){
         String temp = new String();
         for (int i = 0; i < dimension; i++){
