@@ -67,7 +67,7 @@ public class numera {
                 }
                 System.out.println( original.getPosiciones(8) );
                 System.out.println( original.getString(8) );
-                System.out.println();
+                System.out.println( "-----" );
                 return 1;
             }
             else {
