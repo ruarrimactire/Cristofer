@@ -80,6 +80,14 @@ public class lista {
         String temp = new String();
         for (int i = 0; i < dimension; i++){
             temp += letras[i];
+        }
+        return temp;
+    }
+
+    public String getString2(){
+        String temp = new String();
+        for (int i = 0; i < dimension; i++){
+            temp += letras[i];
             for(int j = 0 ; j < 3; j++){
                 temp += " ";
             }
