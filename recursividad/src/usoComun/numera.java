@@ -24,7 +24,7 @@ public class numera {
      */
     public static int numera( String referencia, String comparacion ) {
         lista referencia2 = new lista(referencia);
-        return numera(referencia2, comparacion, 0);
+        return numera(referencia2, referencia2, comparacion, 0);
         
     }
 
@@ -39,7 +39,7 @@ public class numera {
      * @param remLetras es un array de char que contiene las letras que se han quitado.
      * @return
      */
-    static int numera( lista referencia, String comparacion, int n ) {
+    static int numera(lista original, lista referencia, String comparacion, int n ) {
         
         if (referencia.dimension() != comparacion.length()) {
             
@@ -47,14 +47,26 @@ public class numera {
             for (int i = n ; i < referencia.dimension() ; i++) {
                 lista nueva = referencia.remove(i);
                 // la funcion se llama a si misma
-                count += numera( nueva, comparacion, i);
+                count += numera(original, nueva, comparacion, i);
             }
             return count;
         }
         else {
+            String debug1 = "";
+            String debug2 = "";
             if ( comparacion.equals(referencia.getString(0)) ){
-                System.out.println( referencia.getPosiciones(8) );
-                System.out.println( referencia.getString(8) );
+                for (int i = 0; i < original.dimension(); i++) {
+                    for (int j = 0; j < referencia.dimension(); j++){
+                        debug1 = original.sublista(i, i+1).getPosiciones(1);
+                        debug2 = referencia.sublista(j, j+1).getPosiciones(1);
+                        if (!debug1.equals( debug2 ) ) {
+                            original = original.remove(i);
+                            i=i;
+                        }
+                    }
+                }
+                System.out.println( original.getPosiciones(8) );
+                System.out.println( original.getString(8) );
                 System.out.println();
                 return 1;
             }
