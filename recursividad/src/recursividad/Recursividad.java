@@ -7,6 +7,7 @@
 package recursividad;
 
 import usoComun.usoComun;
+import usoComun.numera;
 
 /**
  *
