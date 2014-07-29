@@ -38,37 +38,63 @@ public class lista {
            posicion[i] = i+1;
        }   
    }
-   // Este metodo es el que se encarga de remover las letras y añadir el resultado
-   // a la nueva lista.
+    // this.XXX se refiere al valor original de XXX contenido en el objeto original.
+    // este metodo recorta la lista desde una posicion de inicio hasta una posicion de fin.
+    public lista sublista (int inicio, int fin) {
+        lista nueva = new lista(fin - inicio);
+       // inicio y fin seran proporcionados por el segmento de programa que llame al metodo sublista.
+        for (int i = inicio; i < fin; i++ ){
+             nueva.letras[i-inicio] = this.letras[i];
+             nueva.posicion[i-inicio] = this.posicion[i];
+        }
+        return nueva;
+    }
+    
+    // sobrecarga del metodo sublista para generar un atajo.
+    // comienza en inicio y sigue hasta fin usando el parametro dimension.
+    public lista sublista (int inicio) {
+        return this.sublista(inicio, this.dimension());
+    }
+
+    // Este metodo coge dos trozos de lista y los une.
+    public lista add(lista paraAñadir) {
+        lista nueva = new lista(this.dimension() + paraAñadir.dimension());
+        // En este bucle se le añade a nueva el primer trozo de lista.
+        for (int i = 0; i < this.dimension(); i++){
+            nueva.letras[i] = this.letras[i];
+            nueva.posicion[i] = this.posicion[i];
+        }
+        // En este bucle se le añade a nueva el segundo trozo de lista que se escribira
+        // a continuacion del primer trozo ya añadido en el bucle anterior.
+        for (int i = 0; i < paraAñadir.dimension(); i++){
+            nueva.letras[i+this.dimension()] = paraAñadir.letras[i];
+            nueva.posicion[i+this.dimension()] = paraAñadir.posicion[i];            
+        }
+        return nueva;
+    }
+    // Este metodo es el que se encarga de remover las letras y añadir el resultado
+    // a la nueva lista.
    public lista remove(int columna){
-       lista nueva = new lista(dimension-1);
-       
-       for (int i = 0; i < columna; i++){
-           nueva.letras[i] = letras[i];
-           nueva.posicion[i] = posicion[i];
-       }
-       
-       for(int i = columna+1; i < dimension; i++){
-           nueva.letras[i-1] = letras[i];
-           nueva.posicion[i-1] = posicion[i];
-       }
-       
-       return nueva;
+       return this.sublista(0, columna).add(this.sublista(columna+1));
    }
+   
    // Este metodo devuelve un String con los numeros de las posiciones formateados.
-    public String getPosiciones(int espacios){
+   // int separacion define cuantos caracteres minimos imprimir por columna.
+    public String getPosiciones(int separacion){
         String temp = new String();
         for (int i = 0; i < dimension; i++){
             /** Este String.format(); modifica la cadena "%%0%dd" de manera
              * que vaya a sustituir [%%]0[%d]d con %02d
              */
-            String format = String.format("%%-%dd", espacios);
+            String format = String.format("%%-%dd", separacion);
             /** Para hacer que un numero sea imprimido con minimo dos
             * caracteres y que vaya rellenando de 0 a la izquierda, hay
             * que utilizar, el metodo String.format(); que tomara como
             * primer parametros la cadena "%02d"  y como segundo parametro
             * la variable original que contiene los numeros y devolvera un
             * String formateado de esta manera.
+            * Poniendo un - en lugar del 0 en la cadena de parametros, el numero 
+            * sera ajustado a la izquierda.
             * docs.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html#syntax
             */
             String result = String.format(format, posicion[i]);
@@ -77,15 +103,15 @@ public class lista {
         return temp;
     }
    // Este metodo devuelve un String con el contenido de las letras.
-    public String getString(int espacios){
+   // int separacion define cuantos caracteres minimos imprimir por columna.
+    public String getString(int separacion){
         String temp = new String();
         for (int i = 0; i < dimension; i++){
             temp += letras[i];
-            for(int j = 0 ; j < espacios-1; j++){
+            for(int j = 0 ; j < separacion-1; j++){
                 temp += " ";
             }
         }
         return temp;
     }
-
 }
