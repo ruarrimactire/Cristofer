@@ -31,6 +31,12 @@ public class Recursividad {
         frase = frase.toLowerCase();
         palabra = palabra.toLowerCase();
         
-        System.out.println("La palabra '" + palabra + "' Está incluida en '" + frase + "' " + numera.numera(frase, palabra) + " veces.");
-    } 
+        System.out.println("La palabra '" 
+            + palabra 
+            + "' Esta incluida en '" 
+            + frase 
+            + "' " 
+            + numera.numera(frase, palabra) 
+            + " veces.");
+    }
 }

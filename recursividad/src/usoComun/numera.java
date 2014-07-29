@@ -52,8 +52,10 @@ public class numera {
             return count;
         }
         else {
-            if ( comparacion.equals(referencia.getString()) ){
-                System.out.println( referencia.getPosiciones() );
+            if ( comparacion.equals(referencia.getString(0)) ){
+                System.out.println( referencia.getString(5) );
+                System.out.println( referencia.getPosiciones(5) );
+                System.out.println( "-----" );
                 return 1;
             }
             else {
