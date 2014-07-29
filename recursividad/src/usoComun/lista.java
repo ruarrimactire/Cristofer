@@ -75,19 +75,7 @@ public class lista {
     // Este metodo es el que se encarga de remover las letras y añadir el resultado
     // a la nueva lista.
    public lista remove(int columna){
-       lista nueva = new lista(dimension-1);
-       
-       for (int i = 0; i < columna; i++){
-           nueva.letras[i] = letras[i];
-           nueva.posicion[i] = posicion[i];
-       }
-       
-       for(int i = columna+1; i < dimension; i++){
-           nueva.letras[i-1] = letras[i];
-           nueva.posicion[i-1] = posicion[i];
-       }
-       
-       return nueva;
+       return this.sublista(0, columna).add(this.sublista(columna+1));
    }
    
    // Este metodo devuelve un String con los numeros de las posiciones formateados.
