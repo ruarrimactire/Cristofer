@@ -56,6 +56,18 @@ public class lista {
         return this.sublista(inicio, this.dimension());
     }
 
+    public lista subtract(lista paraRestar){
+    lista nueva = this;
+    for(int i = 0; i < nueva.dimension(); i++) {
+        for(int j = 0; j < paraRestar.dimension(); j++) {
+            if (nueva.posicion[i] == paraRestar.posicion[j]){
+                nueva = nueva.remove(i);
+            }
+        }
+    }   
+    return nueva;
+    }
+    
     // Este metodo coge dos trozos de lista y los une.
     public lista add(lista paraAñadir) {
         lista nueva = new lista(this.dimension() + paraAñadir.dimension());
