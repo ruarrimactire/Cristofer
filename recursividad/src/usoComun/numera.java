@@ -45,7 +45,9 @@ public class numera {
             
             int count = 0;
             for (int i = n ; i < referencia.dimension() ; i++) {
-                lista nueva = referencia.remove(i);
+                lista nueva = referencia.sublista(0,i).add(referencia.sublista(i+1));
+//                lista nueva = referencia.sublista(0,i).add(referencia.sublista(i+1, referencia.dimension()));
+//                lista nueva = referencia.remove(i);
                 // la funcion se llama a si misma
                 count += numera( nueva, comparacion, i);
             }

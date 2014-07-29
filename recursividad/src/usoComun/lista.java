@@ -49,6 +49,13 @@ public class lista {
         }
         return nueva;
     }
+    
+    // sobrecarga del metodo sublista para generar un atajo.
+    // comienza en inicio y sigue hasta fin usando el parametro dimension.
+    public lista sublista (int inicio) {
+        return this.sublista(inicio, this.dimension());
+    }
+
     // Este metodo coge dos trozos de lista y los une.
     public lista add(lista paraAñadir) {
         lista nueva = new lista(this.dimension() + paraAñadir.dimension());
