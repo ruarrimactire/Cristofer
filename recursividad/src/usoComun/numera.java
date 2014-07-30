@@ -52,21 +52,11 @@ public class numera {
             return count;
         }
         else {
-            String debug1 = "";
-            String debug2 = "";
             if ( comparacion.equals(referencia.getString(0)) ){
-                for (int i = 0; i < original.dimension(); i++) {
-                    for (int j = 0; j < referencia.dimension(); j++){
-                        debug1 = original.sublista(i, i+1).getPosiciones(1);
-                        debug2 = referencia.sublista(j, j+1).getPosiciones(1);
-                        if (!debug1.equals( debug2 ) ) {
-                            original = original.remove(i);
-                            i=i;
-                        }
-                    }
-                }
-                System.out.println( original.getPosiciones(8) );
-                System.out.println( original.getString(8) );
+                System.out.println( referencia.getPosiciones(8) );
+                System.out.println( referencia.getString(8) );
+                System.out.println( original.subtraer(referencia).getPosiciones(5) );
+                System.out.println( original.subtraer(referencia).getString(5) );
                 System.out.println();
                 return 1;
             }
