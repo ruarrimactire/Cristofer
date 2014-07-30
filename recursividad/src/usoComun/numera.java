@@ -53,8 +53,10 @@ public class numera {
         }
         else {
             if ( comparacion.equals(referencia.getString(0)) ){
-                System.out.println( original.subtract(referencia).getPosiciones(8) );
-                System.out.println( original.subtract(referencia).getString(8) );
+                System.out.println( referencia.getPosiciones(8) );
+                System.out.println( referencia.getString(8) );
+                System.out.println( original.subtraer(referencia).getPosiciones(5) );
+                System.out.println( original.subtraer(referencia).getString(5) );
                 System.out.println( "-----" );
                 return 1;
             }
