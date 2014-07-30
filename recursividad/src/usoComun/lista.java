@@ -56,6 +56,28 @@ public class lista {
         return this.sublista(inicio, this.dimension());
     }
 
+    /**
+     * Metodo que sirve en el programa recursividad para individualizar las letras
+     * que han sido eliminadas de la lista original para formar una comparacion.
+     * @param paraRestar lista aquellos elementos que hay que restar de la lista this.
+     * @return devuelve una lista tras haber quitado los elementos comunes de paraRestar.
+     */
+    public lista subtraer(lista paraRestar){
+        lista nueva = this;
+        // Control de error mediante el if, puede ser que sea inutil.
+        if (nueva.dimension() < paraRestar.dimension()){
+            return null;
+        }
+        for (int i = 0; i < nueva.dimension(); i++) {
+            for (int j = 0; j < paraRestar.dimension(); j++) {
+                if(nueva.posicion[i] == paraRestar.posicion[j]){
+                    nueva = nueva.remove(i);
+                }
+            }
+        }
+        return nueva;
+    }
+    
     // Este metodo coge dos trozos de lista y los une.
     public lista add(lista paraAñadir) {
         lista nueva = new lista(this.dimension() + paraAñadir.dimension());
@@ -72,6 +94,29 @@ public class lista {
         }
         return nueva;
     }
+    
+    /**
+     * Metodo que sirve en el programa recursividad para individualizar las letras
+     * que han sido eliminadas de la lista original para formar una comparacion.
+     * @param paraRestar lista aquellos elementos que hay que restar de la lista this.
+     * @return devuelve una lista tras haber quitado los elementos comunes de paraRestar.
+     */
+    public lista subtraer(lista paraRestar){
+        lista nueva = this;
+        // Control de error mediante el if, puede ser que sea inutil.
+        if (nueva.dimension() < paraRestar.dimension()){
+            return null;
+        }
+        for (int i = 0; i < nueva.dimension(); i++) {
+            for (int j = 0; j < paraRestar.dimension(); j++) {
+                if(nueva.posicion[i] == paraRestar.posicion[j]){
+                    nueva = nueva.remove(i);
+                }
+            }
+        }
+        return nueva;
+    }
+    
     // Este metodo es el que se encarga de remover las letras y añadir el resultado
     // a la nueva lista.
    public lista remove(int columna){

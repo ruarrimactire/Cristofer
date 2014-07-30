@@ -24,7 +24,7 @@ public class numera {
      */
     public static int numera( String referencia, String comparacion ) {
         lista referencia2 = new lista(referencia);
-        return numera(referencia2, comparacion, 0);
+        return numera(referencia2, referencia2, comparacion, 0);
         
     }
 
@@ -39,7 +39,7 @@ public class numera {
      * @param remLetras es un array de char que contiene las letras que se han quitado.
      * @return
      */
-    static int numera( lista referencia, String comparacion, int n ) {
+    static int numera(lista original, lista referencia, String comparacion, int n ) {
         
         if (referencia.dimension() != comparacion.length()) {
             
@@ -47,14 +47,16 @@ public class numera {
             for (int i = n ; i < referencia.dimension() ; i++) {
                 lista nueva = referencia.remove(i);
                 // la funcion se llama a si misma
-                count += numera( nueva, comparacion, i);
+                count += numera(original, nueva, comparacion, i);
             }
             return count;
         }
         else {
             if ( comparacion.equals(referencia.getString(0)) ){
-                System.out.println( referencia.getString(5) );
-                System.out.println( referencia.getPosiciones(5) );
+                System.out.println( referencia.getPosiciones(8) );
+                System.out.println( referencia.getString(8) );
+                System.out.println( original.subtraer(referencia).getPosiciones(5) );
+                System.out.println( original.subtraer(referencia).getString(5) );
                 System.out.println( "-----" );
                 return 1;
             }
