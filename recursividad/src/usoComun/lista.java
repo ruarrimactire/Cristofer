@@ -21,13 +21,20 @@ public class lista {
        return dimension;
    }
     // Este metodo inicializa las variables en una lista vacia.
+    // Esto se llama constructor y permite la creacion del objeto
+    // Este en concreto crea un objeto vacio solo con el tamaño especificado de 
+    // memoria pero vacio.
    lista(int dim){
        letras = new char [dim];
        posicion = new int [dim];
        dimension = dim;
    }
    
-    // Este metodo inicializa una lista con la frase que se introduce.
+   // Este metodo inicializa una lista con la frase que se introduce.
+   // Este es un polimorfismo del primer contructor que permite crear un objeto de
+   // la clase lista rellenandolo con las letras de una cadena de texto.
+   // Por los contructores nunca se especifica el tipo de objeto que va a devolver,
+   // ni siquiera el void, tienen que tener obligatoriamente el mismo nombre de la clase.
    lista(String frase){
        letras = new char [frase.length()];
        posicion = new int [frase.length()];
@@ -68,6 +75,11 @@ public class lista {
         if (nueva.dimension() < paraRestar.dimension()){
             return null;
         }
+        /** Estos dos bucles lo que hacen es recorrer los parametros nueva y paraRestar,
+        * a continuacion los compara y la quita a la frase original nueva las coincidencias,
+        * el resultado se va guardando en nueva cada vez que se ejecuta el bucle y al finalizar
+        * se devuelve el valor de nueva ya modificado.
+        */ 
         for (int i = 0; i < nueva.dimension(); i++) {
             for (int j = 0; j < paraRestar.dimension(); j++) {
                 if(nueva.posicion[i] == paraRestar.posicion[j]){
@@ -79,6 +91,9 @@ public class lista {
     }
     
     // Este metodo coge dos trozos de lista y los une.
+    // Todos los metodos en la clase lista son metodos de instancia, o sea que pueden
+    // ser invocados solo de un objeto de la clase lista (la clase con la que se han creado)
+    // Los metodos de instancia pueden acceder a todas las variables de instancia
     public lista add(lista paraAñadir) {
         lista nueva = new lista(this.dimension() + paraAñadir.dimension());
         // En este bucle se le añade a nueva el primer trozo de lista.

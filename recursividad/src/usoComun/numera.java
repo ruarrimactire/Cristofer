@@ -13,9 +13,16 @@ package usoComun;
 public class numera {
     
     /**
-     * Este es un ejemplo de sobrecarga de metodo. Son dos metodos con un nombre
+     * Este es un ejemplo de sobrecarga de metodo (polimorfismo). Son dos metodos con un nombre
      * comun, con diferente numero de argumentos aceptados y con diferentes
      * trabajos que tienen que realizar.
+     * 
+     * Los metodos de esta clase son todos de clase, se distinguen por que son static,
+     * los metodos de clase no pueden acceder a las variables y todos los que necesiten
+     * se les han de pasar como argumentos.
+     * 
+     * Este es un metodo publico, lo que quiere decir que se puede ver desde otras
+     * partes del programa que hayan importado la clase numera (import numera.;)
      * 
      * @param referencia es un String que contiene la frase en la que hay que
      *                   buscar las combinaciones de palabras.
@@ -31,6 +38,16 @@ public class numera {
     /**
      * Este es un ejemplo de funcion recursiva, ya que en el cuerpo de la funcion
      * se va a llamar a si misma.
+     * 
+     * Este metodo no es publico, lo que quiere decir que no se puede invocar desde
+     * otrar clase del programa, solo desde esta clase.
+     * Cuando no se indica ningun modificador de acceso (private, public, protected y default)
+     * por defecto es DEFAULT, o sea el metodo solo puede ser invocado desde clases
+     * del mismo paquete (package).
+     * PRIVATE permite que el metodo sea invocado solo desde la misma clase.
+     * PROTECTED permite que se invoque el metodo desde clases del mismo paquete y
+     * desde subclases.
+     * PUBLIC permite que se acceda desde cualquier clase del programa.
      * 
      * @param referencia
      * @param comparacion
