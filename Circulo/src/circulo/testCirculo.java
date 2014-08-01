@@ -24,10 +24,9 @@ public class testCirculo {
         c2 = new Circulo("verde", 15.0);
         c3 = new Circulo("rojo", 19.0);
         
-        System.out.println("Se muestra el area del circulo " + c1.color + " = " + c1.area() );
-        System.out.println("Se muestra el area del circulo " + c2.color + " = " + c2.area() );
-        System.out.println("Se muestra el area del circulo " + c3.color + " = " + c3.area() );
-
+        System.out.println("El circulo " + c1.getColor() + " tiene un radio de: " + c1.getRadio() + " y un area = " + c1.area());
+        System.out.println("El circulo " + c2.getColor() + " tiene un radio de: " + c2.getRadio() + " y un area = " + c2.area());
+        System.out.println("El circulo " + c3.getColor() + " tiene un radio de: " + c3.getRadio() + " y un area = " + c3.area());
         // Destruccion de los tres objetos Circulo.
         c1 = null;
         c2 = null;

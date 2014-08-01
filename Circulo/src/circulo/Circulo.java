@@ -16,11 +16,11 @@ public class Circulo {
     * Este valor se podra modificar desde los metodos del programa, cada vez que se
     * modifique se modificara en todos los metodos en los que aparezca.
     */
-    static int numObjetos = 0;
+    private static int numObjetos = 0;
     // color y radio son variables de instancia, su valor puede ser diferente en
     // las varias instancias/objetos declarados.
-    String color;
-    double radio;
+    private String color;
+    private double radio;
     // Esta es una constante al ser declarada como "final".
     final static double PI = 3.14159265D;
     final static String colorDefault = "verde";
@@ -48,8 +48,7 @@ public class Circulo {
         System.out.println("Objetos actualmente declarados = " + numObjetos);
     }
     
-    public static int numObjetos(){
-        
+    public static int numObjetos(){        
         return numObjetos;
     }
     
@@ -70,4 +69,11 @@ public class Circulo {
             );
     }
     
+    public String getColor(){       
+        return color;
+    }
+    
+    public double getRadio(){       
+        return radio;
+    }    
 }
