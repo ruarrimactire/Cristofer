@@ -33,10 +33,15 @@ public class testCirculo {
         c2 = null;
         c3 = null;
         
+        // System.runFinalizersOnExit(true);
         System.out.println("numObjetos = " + Circulo.numObjetos());
+        
         System.gc(); // Esta instruccion fuerza al recolector de basura y lo que hace es llamar al metodo
         // finalize para cada uno de los bojetos marcasdos como null.
         // Despues de forar el recolector de basura el valor de numObjetos deveria ser diferente.
+
+        System.runFinalization();
+        
         System.out.println("numObjetos = " + Circulo.numObjetos());        
     }
 }
