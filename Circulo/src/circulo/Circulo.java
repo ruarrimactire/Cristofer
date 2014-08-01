@@ -20,11 +20,11 @@ public class Circulo {
     // color y radio son variables de instancia, su valor puede ser diferente en
     // las varias instancias/objetos declarados.
     String color;
-    Double radio;
+    double radio;
     // Esta es una constante al ser declarada como "final".
-    final static double PI = 3.14159265;
+    final static double PI = 3.14159265D;
     final static String colorDefault = "verde";
-    final static double radioDefault = 5.0;
+    final static double radioDefault = 5.0D;
     
     // Constructor vacio.
     public Circulo(){
@@ -35,14 +35,14 @@ public class Circulo {
         this(color, radioDefault);
     }
     
-    public Circulo(Double radio){
+    public Circulo(double radio){
         this(colorDefault, radio);
     }
     
-    public Circulo (String color, Double radio){
-        color = this.color;
+    public Circulo (String color, double radio){
+        this.color = color;
         if (radio >= 0){
-            radio = this.radio;
+            this.radio = radio;
             numObjetos++;
         }
         System.out.println("Objetos actualmente declarados = " + numObjetos);
@@ -59,7 +59,7 @@ public class Circulo {
     }
     
     public double area(){
-        return (this.PI*this.radio*this.radio);
+        return (PI*radio*radio);
     }
     
     public boolean equals(Object otro){
