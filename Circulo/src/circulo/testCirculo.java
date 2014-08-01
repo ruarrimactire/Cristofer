@@ -20,13 +20,13 @@ public class testCirculo {
         // Declaracion de tres objetos Circulo.
         Circulo c1, c2, c3;
         // Inicializacion de los tres objetos Circulo.
-        c1 = new Circulo("azul", 15.0);
+        c1 = new Circulo("azul", 7.0);
         c2 = new Circulo("verde", 15.0);
-        c3 = new Circulo("rojo", 15.0);
+        c3 = new Circulo("rojo", 19.0);
         
-        System.out.println("Se muestra el area del circulo c1 = " + c1.area() );
-        System.out.println("Se muestra el area del circulo c2 = " + c2.area() );
-        System.out.println("Se muestra el area del circulo c3 = " + c3.area() );
+        System.out.println("Se muestra el area del circulo " + c1.color + " = " + c1.area() );
+        System.out.println("Se muestra el area del circulo " + c2.color + " = " + c2.area() );
+        System.out.println("Se muestra el area del circulo " + c3.color + " = " + c3.area() );
 
         // Destruccion de los tres objetos Circulo.
         c1 = null;
