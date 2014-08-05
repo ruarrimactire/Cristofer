@@ -12,7 +12,36 @@ package figuras;
  */
 public class Triangulo extends Fig2D {
     
+    protected static int numTriangulos = 0;
+    protected int lado1;
+    protected int lado2;
+    protected int lado3;
+    protected final static int lado1Default = 5;
+    protected final static int lado2Default = 6;
+            
     public Triangulo(){
-        color = colorDefault;
+        this(lado1Default, lado2Default, lado2Default, colorDefault);
     }
+
+    public Triangulo(int lado1, int lado2, int lado3, String color){
+        this.lado1 = lado1;
+        this.lado2 = lado2;
+        this.lado3 = lado3;
+        this.color = color;
+        numObjetos ++;
+        numTriangulos ++;
+    }
+    
+    public static int numObjetos(){        
+        return numTriangulos;
+    }
+    
+    public void finalize(){
+        numObjetos--;
+        numTriangulos--;
+        System.out.println("Objetos actualmente declarados = " + numObjetos);
+        System.out.println("Circulos actualmente declarados = " + numTriangulos);
+    }
+    
+
 }

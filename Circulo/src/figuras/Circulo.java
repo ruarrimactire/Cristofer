@@ -42,6 +42,7 @@ public class Circulo extends Fig2D {
         if (radio >= 0){
             this.radio = radio;
             numObjetos++;
+            numCirculos++;
         }
         System.out.println("Objetos actualmente declarados = " + numObjetos);
     }
