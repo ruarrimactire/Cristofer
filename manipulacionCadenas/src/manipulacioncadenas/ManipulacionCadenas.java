@@ -91,7 +91,21 @@ public class ManipulacionCadenas {
         System.out.println("Numero de palabras: " + i);
         // El Scanner siempre se tiene que cerrar al final.
         sc.close();
-
+        
+        String str = "1  globos 2    globas 3     globos";
+        // En este ejemplo se puede apreciar que lo que hay entre [] son corchetes
+        // alternativos que debe de buscar.
+        Scanner cs2 = new Scanner(str).useDelimiter("\\s*glob[oa]s\\s*");
+        while (cs2.hasNext()){
+            System.out.println(cs2.next());
+        }
+        cs2.close();
+        
+        /*
+        La clase Scanner se puede usar tambien con la clase System.in de entrada:
+        Scaner XXX = new Scanner (System.in);
+        int i = XXX.next.in();
+        */        
     }
         
     
