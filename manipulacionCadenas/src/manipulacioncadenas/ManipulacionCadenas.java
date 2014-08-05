@@ -7,6 +7,7 @@
 package manipulacioncadenas;
 
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -43,10 +44,39 @@ public class ManipulacionCadenas {
         lugar3 = new char[s2.length()];
         // Ejemplo de bucle for con dos indices, dentro de la instruccion del bucle las ','
         // separan las instrucciones de los dos indices.
+        // La funcion del bucle es imprimir la cadena al reves.
         for(int i = s2.length()-1, j = 0; i >= 0; i--, j++ ){
             lugar3[j] = s2.charAt(i);
         }
         System.out.println("Array3: " + Arrays.toString(lugar3) + " Longitud: " + lugar3.length);
+    
+
+        System.out.println("Contenido del String s1: " + s1);
+        
+        // Separamos la cadena
+        // (El espacion en blanco como delimitador)
+        // Se crea el Stringtokenizer asignandole la cadena de 's1' y ' ' como delimitador.
+        StringTokenizer palabras = new StringTokenizer(s1, " ");
+        
+        System.out.println("Numero de palabras " + palabras.countTokens());
+        // hasMoreTokens verifica que el contador no este al final.
+        while ( palabras.hasMoreTokens()){
+            // nextToken devuelve en forma de String lo que hay en la posicion 
+            // a la que apunta el contador, y despues incrementa el contador de 1.
+            System.out.println(palabras.nextToken());
+        }
+        
+        String[] palabras2 = s1.split("[\\se]");
+        System.out.println("Numero de palabras: " + palabras2.length);
+        
+        for (int i = 0; i < palabras2.length; i++){
+            System.out.println(palabras2[i]);
+        }
+        
+        
+
     }
+        
+    
     
 }
