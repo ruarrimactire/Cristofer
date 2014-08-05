@@ -7,6 +7,7 @@
 package manipulacioncadenas;
 
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -70,14 +71,26 @@ public class ManipulacionCadenas {
         // los [] sirven para enumerar una lista de delimitadores.
         // El doble \\ sirve para que cuando se pase la cadena a split, se imprima en su lugar
         // la singula \.
-        String[] palabras2 = s1.split("\\sd");
+        // Si no se usan los [] el split usa la cadena entera.
+        String[] palabras2 = s1.split("[\\se]");
         System.out.println("Numero de palabras: " + palabras2.length);
         
         for (int i = 0; i < palabras2.length; i++){
             System.out.println(palabras2[i]);
         }
         
-        
+        System.out.println();
+        Scanner sc = new Scanner(s1).useDelimiter("\\s");
+        int i = 0;
+        // Scanner funciona muy parecido al StringTokenizer, pero utiliza expresiones
+        // regulares tambien tiene los metodos '.hasNext' y '.next'
+        while (sc.hasNext()){
+            System.out.println(sc.next());
+            i++;
+        }
+        System.out.println("Numero de palabras: " + i);
+        // El Scanner siempre se tiene que cerrar al final.
+        sc.close();
 
     }
         
