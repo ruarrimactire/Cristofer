@@ -66,7 +66,11 @@ public class ManipulacionCadenas {
             System.out.println(palabras.nextToken());
         }
         
-        String[] palabras2 = s1.split("[\\se]");
+        // El metodo split permite la utilizacion de una expresion regular como delimitador.
+        // los [] sirven para enumerar una lista de delimitadores.
+        // El doble \\ sirve para que cuando se pase la cadena a split, se imprima en su lugar
+        // la singula \.
+        String[] palabras2 = s1.split("\\sd");
         System.out.println("Numero de palabras: " + palabras2.length);
         
         for (int i = 0; i < palabras2.length; i++){
