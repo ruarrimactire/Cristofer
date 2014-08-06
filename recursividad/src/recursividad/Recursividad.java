@@ -6,8 +6,15 @@
 
 package recursividad;
 
-import usoComun.usoComun;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.SortedMap;
 import usoComun.numera;
+import usoComun.usoComun;
 
 /**
  *
@@ -31,12 +38,32 @@ public class Recursividad {
         frase = frase.toLowerCase();
         palabra = palabra.toLowerCase();
         
-        System.out.println("La palabra '" 
+        String out = "La palabra '" 
             + palabra 
             + "' Esta incluida en '" 
             + frase 
             + "' " 
             + numera.numera(frase, palabra) 
-            + " veces.");
+            + " veces.\n\n";
+        
+        System.out.println(out);
+        
+        SortedMap mappa = Charset.availableCharsets();
+        CharSequence out2 = (CharSequence)mappa.toString().replace(",", "\n") + "\n";
+        
+        String out3 = numera.getResult();
+
+        Path file2 = Paths.get("./secondo.txt");
+        Charset charset = Charset.forName("UTF-16");
+
+        try (BufferedWriter writer = Files.newBufferedWriter(file2, charset)) {
+            writer.write(out, 0, out.length());
+//            writer.append(out2, 0, out2.length());
+            writer.append(out3, 0, out3.length());
+            writer.close();
+        } catch (IOException x) {
+            System.err.format("IOException: %s%n", x);
+        }
+        
     }
 }

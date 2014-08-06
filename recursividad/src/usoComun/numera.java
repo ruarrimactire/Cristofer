@@ -12,6 +12,8 @@ package usoComun;
  */
 public class numera {
     
+    protected static String result = "";
+    
     /**
      * Este es un ejemplo de sobrecarga de metodo (polimorfismo). Son dos metodos con un nombre
      * comun, con diferente numero de argumentos aceptados y con diferentes
@@ -70,16 +72,24 @@ public class numera {
         }
         else {
             if ( comparacion.equals(referencia.getString(0)) ){
-                System.out.println( referencia.getPosiciones(8) );
-                System.out.println( referencia.getString(8) );
-                System.out.println( original.subtraer(referencia).getPosiciones(5) );
-                System.out.println( original.subtraer(referencia).getString(5) );
-                System.out.println( "-----" );
+                result += referencia.getPosiciones(8) + "\n";
+                result += referencia.getString(8) + "\n";
+                result += original.subtraer(referencia).getPosiciones(5) + "\n";
+                result += original.subtraer(referencia).getString(5) + "\n";
+                result += "-----" + "\n";
                 return 1;
             }
             else {
                 return 0;
             }
         }
+    }
+    
+    public static String getResult(){
+        return result;
+    }
+
+    public static void delResult(){
+        result = "";
     }
 }
