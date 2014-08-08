@@ -7,6 +7,7 @@
 package circulo;
 
 import figuras.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +16,8 @@ import figuras.*;
 class InstanceOfDemo2 {
     public static void main (String[] args) {
         int contTriangulos, contCirculos, contNulos;
-        Fig2D[] lista; 
+        // Se declara un ArrayList en llugar de un array nomal ya que este se puede modificar.
+        ArrayList<Fig2D> lista = new ArrayList<Fig2D>(); 
         Triangulo t1, t2, t3, t4;
         Circulo c1, c2, c3, c4;
         
@@ -28,27 +30,33 @@ class InstanceOfDemo2 {
         c2 = new Circulo();
         c3 = new Circulo();
         c4 = null; // no creado.
+       
         
-        lista = new Fig2D[8];
-        lista [0] = t1; //Asignamos un objeto triangulo
-        lista [1] = t2; //Asignamos un objeto triangulo
-        lista [2] = t3; //Asignamos un objeto triangulo
-        lista [3] = t4; //Asignamos un objeto nulo
-        lista [4] = c1; //Asignamos un objeto circulo
-        lista [5] = c2; //Asignamos un objeto circulo
-        lista [6] = c3; //Asignamos un objeto circulo
-        lista [7] = c4; //Asignamos un objeto nulo
-        // El ooperador instanceof daria error si se intenta comparar dos objetos que no son compatibles.
-        // Para que no de error se pueden añadir varios objetos a un array de objetos que pertenecen a la superclase de todos los objetos.
-        // La superclase, ya sea de triangulos o de circulos es la de Fig2D, por eso a un array de Fig2D se podran añadir tanto Triangulos como Circulos.
-        // Mostramos y contamos los objetos de la ista
+        lista.add(t1); //Asignamos un objeto
+        lista.add(t2); //Asignamos un objeto
+        lista.add(t3); //Asignamos un objeto
+        lista.add(t4); //Asignamos un objeto
+        lista.add(c1); //Asignamos un objeto
+        lista.add(c2); //Asignamos un objeto
+        lista.add(c3); //Asignamos un objeto
+        lista.add(c4); //Asignamos un objeto
+
+        /**
+         * El operador instanceof daria error si se intenta comparar dos objetos que no son compatibles.
+         * Para que no de error se pueden añadir varios objetos a un array de
+         * objetos que pertenecen a la superclase de todos los objetos.
+         * La superclase, ya sea de triangulos o de circulos es la de Fig2D,
+         * por eso a un array de Fig2D se podran añadir tanto Triangulos como Circulos.
+         * Mostramos y contamos los objetos de la ista
+        */
         contTriangulos = contCirculos = contNulos = 0;
-        for (int i = 0; i < lista.length; i++){
-            System.out.println("Objeto " + i + " = " + lista[i]);
-            if(lista[i] instanceof Triangulo) {
+        // ArrayList no tiene el metodo .length(), en su lugar se usa .size().
+        for (int i = 0; i < lista.size(); i++){
+            System.out.println("Objeto " + (i+1) + " = " + lista.get(i));
+            if(lista.get(i) instanceof Triangulo) {
                 contTriangulos++;
             } 
-            else if (lista[i] instanceof Circulo){
+            else if (lista.get(i) instanceof Circulo){
                 contCirculos++;
             } else {
                 contNulos++;
