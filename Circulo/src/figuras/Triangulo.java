@@ -18,9 +18,18 @@ public class Triangulo extends Fig2D {
     protected int lado3;
     protected final static int lado1Default = 5;
     protected final static int lado2Default = 6;
+    protected final static int lado3Default = 6;
             
     public Triangulo(){
-        this(lado1Default, lado2Default, lado2Default, colorDefault);
+        this(lado1Default, lado2Default, lado3Default, colorDefault);
+    }
+    
+    public Triangulo (String color){
+        this(lado1Default, lado2Default, lado3Default, color);
+    }
+    
+    public Triangulo (int lado){
+        this(lado, lado, lado, colorDefault);
     }
 
     public Triangulo(int lado1, int lado2, int lado3, String color){
@@ -43,5 +52,27 @@ public class Triangulo extends Fig2D {
         System.out.println("Circulos actualmente declarados = " + numTriangulos);
     }
     
-
+    public double area(){
+        double semiPerimetro = (lado1 + lado2 + lado3 / 2);
+        return (Math.sqrt(semiPerimetro) * (semiPerimetro - lado1) * (semiPerimetro - lado2) * (semiPerimetro - lado3));
+        // El metodo 'sqrt' de 'Math' (Math.sqrt()) se usa para hacer raices cuadradas.
+    }
+    
+    public int[] getLados(){
+        int[] lados = {lado1,lado2,lado3}; // Esta manera de inicializar datos solo es valida para los arrays.
+        return lados;
+    }
+    
+    public String getColor(){
+        return color;
+    }
+    
+    public boolean equals(Object otro){
+    int[] lados = {lado1, lado2, lado3};
+    return (
+        lados.equals(((Triangulo)otro).getLados())  // convierte el objeto otro a Triangulo, ya que al principio no sabemos que tipo de objeto es otro.
+            &&
+        this.color == ((Triangulo)otro).color // convierte el objeto otro a Triangulo, ya que al principio no sabemos que tipo de objeto es otro.
+        );
+    }
 }

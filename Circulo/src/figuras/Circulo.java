@@ -73,4 +73,7 @@ public class Circulo extends Fig2D {
     public double getRadio(){       
         return radio;
     }    
+    public String getColor(){       
+        return color;
+    }    
 }
