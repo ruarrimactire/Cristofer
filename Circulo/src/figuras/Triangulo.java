@@ -49,7 +49,7 @@ public class Triangulo extends Fig2D {
         numObjetos--;
         numTriangulos--;
         System.out.println("Objetos actualmente declarados = " + numObjetos);
-        System.out.println("Circulos actualmente declarados = " + numTriangulos);
+        System.out.println("Triangulos actualmente declarados = " + numTriangulos);
     }
     
     public double area(){

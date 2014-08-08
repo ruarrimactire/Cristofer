@@ -44,7 +44,7 @@ public class Circulo extends Fig2D {
             numObjetos++;
             numCirculos++;
         }
-        System.out.println("Objetos actualmente declarados = " + numObjetos);
+//        System.out.println("Objetos actualmente declarados = " + numObjetos);
     }
     
     public static int numObjetos(){        
