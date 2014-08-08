@@ -4,26 +4,24 @@
  * and open the template in the editor.
  */
 
-package circulo;
+package figuras;
 
 /**
  *
  * @author Risto
  */
-public class Circulo {
+public class Circulo extends Fig2D {
     /** 
     * numObjetos es una variable de clase, su valor sera igual en todos los objetos.
     * Este valor se podra modificar desde los metodos del programa, cada vez que se
     * modifique se modificara en todos los metodos en los que aparezca.
     */
-    private static int numObjetos = 0;
-    // color y radio son variables de instancia, su valor puede ser diferente en
+    protected static int numCirculos = 0;
+    // radio es una variable de instancia, su valor puede ser diferente en
     // las varias instancias/objetos declarados.
-    private String color;
-    private double radio;
+    protected double radio;
     // Esta es una constante al ser declarada como "final".
     final static double PI = 3.14159265D;
-    final static String colorDefault = "verde";
     final static double radioDefault = 5.0D;
     
     // Constructor vacio.
@@ -44,17 +42,20 @@ public class Circulo {
         if (radio >= 0){
             this.radio = radio;
             numObjetos++;
+            numCirculos++;
         }
-        System.out.println("Objetos actualmente declarados = " + numObjetos);
+//        System.out.println("Objetos actualmente declarados = " + numObjetos);
     }
     
     public static int numObjetos(){        
-        return numObjetos;
+        return numCirculos;
     }
     
     public void finalize(){
         numObjetos--;
+        numCirculos--;
         System.out.println("Objetos actualmente declarados = " + numObjetos);
+        System.out.println("Circulos actualmente declarados = " + numCirculos);
     }
     
     public double area(){
@@ -68,12 +69,11 @@ public class Circulo {
             this.color == ((Circulo)otro).color // convierte el objeto otro a Circulo, ya que al principio no sabemos que tipo de objeto es otro.
             );
     }
-    
-    public String getColor(){       
-        return color;
-    }
-    
+        
     public double getRadio(){       
         return radio;
+    }    
+    public String getColor(){       
+        return color;
     }    
 }
