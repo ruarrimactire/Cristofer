@@ -152,4 +152,22 @@ public class lista {
         }
         return temp;
     }
+    // Este metodo toString devuelve una representacion del contenido del objeto en forma de una cadena de caracteres.
+    public String toString() {
+        return getPosiciones(8) + "\n" + getString(8) + "\n";
+    }
+    // 
+    public boolean equals(Object comparacion){
+        // Si el objeto es nulo return dara false y se cierra el metodo.
+        if (comparacion == null) return false;
+        // Si comparacion no es una instancia de lista se cierra el metodo y devulve false.
+        if (!(comparacion instanceof lista)) return false;
+        // se compara si son el mismo objeto, y en tal caso devuelve true.
+        if (this == comparacion) return true;
+        
+        // para comparar el contenido primero hay que convertir los objetos de manera
+        // que el toString vaya a crear cadenas de texto que sean comparables.
+        lista otra = (lista) comparacion;
+        return (this.toString().equalsIgnoreCase( otra.toString() ) );
+    }
 }
