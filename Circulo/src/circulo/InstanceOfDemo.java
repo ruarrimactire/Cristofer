@@ -11,7 +11,7 @@ import figuras.Fig2D;
 import figuras.Triangulo;
 
 class InstanceofDemo {
-    public static void main ( String [] args ) {
+    public static void main2 ( String [] args ) {
     Fig2D f = new Fig2D ();
     Triangulo t = new Triangulo ();
     Circulo c = new Circulo ();

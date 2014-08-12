@@ -13,12 +13,12 @@ package figuras;
 public class Triangulo extends Fig2D {
     
     protected static int numTriangulos = 0;
-    protected int lado1;
-    protected int lado2;
-    protected int lado3;
-    protected final static int lado1Default = 5;
-    protected final static int lado2Default = 6;
-    protected final static int lado3Default = 6;
+    protected double lado1;
+    protected double lado2;
+    protected double lado3;
+    protected final static double lado1Default = 5.0;
+    protected final static double lado2Default = 6.0;
+    protected final static double lado3Default = 6.0;
             
     public Triangulo(){
         this(lado1Default, lado2Default, lado3Default, colorDefault);
@@ -28,11 +28,11 @@ public class Triangulo extends Fig2D {
         this(lado1Default, lado2Default, lado3Default, color);
     }
     
-    public Triangulo (int lado){
+    public Triangulo (double lado){
         this(lado, lado, lado, colorDefault);
     }
 
-    public Triangulo(int lado1, int lado2, int lado3, String color){
+    public Triangulo(double lado1, double lado2, double lado3, String color){
         this.lado1 = lado1;
         this.lado2 = lado2;
         this.lado3 = lado3;
@@ -58,8 +58,8 @@ public class Triangulo extends Fig2D {
         // El metodo 'sqrt' de 'Math' (Math.sqrt()) se usa para hacer raices cuadradas.
     }
     
-    public int[] getLados(){
-        int[] lados = {lado1,lado2,lado3}; // Esta manera de inicializar datos solo es valida para los arrays.
+    public double[] getLados(){
+        double[] lados = {lado1,lado2,lado3}; // Esta manera de inicializar datos solo es valida para los arrays.
         return lados;
     }
     
@@ -67,12 +67,35 @@ public class Triangulo extends Fig2D {
         return color;
     }
     
-    public boolean equals(Object otro){
-    int[] lados = {lado1, lado2, lado3};
-    return (
-        lados.equals(((Triangulo)otro).getLados())  // convierte el objeto otro a Triangulo, ya que al principio no sabemos que tipo de objeto es otro.
-            &&
-        this.color == ((Triangulo)otro).color // convierte el objeto otro a Triangulo, ya que al principio no sabemos que tipo de objeto es otro.
-        );
+    public boolean equals(Object comparacion){
+       // Si el objeto es nulo return dara false y se cierra el metodo.
+       if (comparacion == null) return false;
+       // Si comparacion no es una instancia de lista se cierra el metodo y devulve false.
+       if (!(comparacion instanceof Triangulo)) return false;
+       // se compara si son el mismo objeto, y en tal caso devuelve true.
+       if (this == comparacion) return true;
+
+       // para comparar el contenido primero hay que convertir los objetos de manera
+       // que el toString vaya a crear cadenas de texto que sean comparables.
+       Triangulo otro = (Triangulo) comparacion;
+       if (this.lado1 == otro.lado1 && 
+               this.lado2 == otro.lado2 && 
+               this.lado3 == otro.lado3 && 
+               this.color == otro.color)
+           return true;
+       else return false;
+       /*
+       todo esto es equivalente a:
+       return (this.lado1 == otro.lado1 && this.lado2 == otro.lado2 && this.lado3 == otro.lado3 && this.color == otro.color);
+       */
+    }
+    
+    /*
+    Sobreescribimos el metodo toString heredado de object.
+    */
+    public String toString() {
+        String s = "Esto es un Triangulo de lados: ";
+        s += "a= " + lado1 + "b= " + lado2 + "c= " + lado3;
+        return s;
     }
 }
