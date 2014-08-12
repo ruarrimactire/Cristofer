@@ -62,36 +62,40 @@ public class Circulo extends Fig2D {
         return (PI*radio*radio);
     }
     
-    public boolean equals(Object comparacion){
-       // Si el objeto es nulo return dara false y se cierra el metodo.
-       if (comparacion == null) return false;
-       // Si comparacion no es una instancia de lista se cierra el metodo y devulve false.
-       if (!(comparacion instanceof Circulo)) return false;
-       // se compara si son el mismo objeto, y en tal caso devuelve true.
-       if (this == comparacion) return true;
-
-       // para comparar el contenido primero hay que convertir los objetos de manera
-       // que el toString vaya a crear cadenas de texto que sean comparables.
-       Circulo otro = (Circulo) comparacion;
-       if (this.radio == otro.radio && 
-               this.color == otro.color)
-           return true;
-       else return false;
-       /*
-       todo esto es equivalente a:
-       return (this.radio == otro.radio && this.color == otro.color);
-       */
-    }
-    
-    /*
-    Sobreescribimos el metodo toString heredado de object.
-    */
-    public String toString() {
-        String s = "Esto es un Circulo de radio: ";
-        s += "r= " + radio + "y color " + color;
-        return s;
-    }
+/*
+    Comentamos este metodo equals para simular que se nos ha olvidado escribir
+    los metodos equals y toString para Circulo.
+    */    
+//    public boolean equals(Object comparacion){
+//       // Si el objeto es nulo return dara false y se cierra el metodo.
+//       if (comparacion == null) return false;
+//       // Si comparacion no es una instancia de lista se cierra el metodo y devulve false.
+//       if (!(comparacion instanceof Circulo)) return false;
+//       // se compara si son el mismo objeto, y en tal caso devuelve true.
+//       if (this == comparacion) return true;
+//
+//       // para comparar el contenido primero hay que convertir los objetos de manera
+//       // que el toString vaya a crear cadenas de texto que sean comparables.
+//       Circulo otro = (Circulo) comparacion;
+//       if (this.radio == otro.radio && 
+//               this.color == otro.color)
+//           return true;
+//       else return false;
+//       /*
+//       todo esto es equivalente a:
+//       return (this.radio == otro.radio && this.color == otro.color);
+//       */
+//    }
         
+//    /*
+//    Sobreescribimos el metodo toString heredado de object.
+//    */
+//    public String toString() {
+//        String s = "Esto es un Circulo de radio: ";
+//        s += "r= " + radio + "y color " + color;
+//        return s;
+//    }
+    
     public double getRadio(){       
         return radio;
     }    
