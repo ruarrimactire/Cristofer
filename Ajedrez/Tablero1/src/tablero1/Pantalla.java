@@ -39,6 +39,17 @@ public class Pantalla extends javax.swing.JFrame {
         temp.setText(name);
         parent.add(temp);
     }
+    
+    // Operaciones necesarias para añadir un Boton.
+    private void AddButton(Container parent, String name, Color color) {
+        JButton temp = new JButton(name);
+        temp.setBackground(color);
+        temp.setText("");
+        temp.setActionCommand(name);
+        temp.addActionListener(this);
+        parent.add(temp);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
