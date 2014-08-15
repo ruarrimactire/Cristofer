@@ -9,6 +9,8 @@ package tablero1;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -16,7 +18,7 @@ import javax.swing.JLabel;
  *
  * @author Risto
  */
-public class Pantalla extends javax.swing.JFrame {
+public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form Pantalla
@@ -280,4 +282,9 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
