@@ -6,6 +6,12 @@
 
 package tablero1;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Risto
@@ -17,8 +23,22 @@ public class Pantalla extends javax.swing.JFrame {
      */
     public Pantalla() {
         initComponents();
+        crearTablero();
     }
 
+    private void crearTablero(){
+        jPanel1.setLayout(new GridLayout(9, 9));
+        
+        
+    }
+    
+    // Operaciones necesarias para añadir un Label.
+    private void AddLabel(Container parent, String name, Color color) {
+        JLabel temp = new JLabel(name);
+        temp.setBackground(color);
+        temp.setText(name);
+        parent.add(temp);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
