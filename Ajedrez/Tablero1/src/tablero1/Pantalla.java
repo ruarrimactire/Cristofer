@@ -30,7 +30,13 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     private void crearTablero(){
         jPanel1.setLayout(new GridLayout(9, 9));
-        
+        /*
+        Estos bucles for se utilizan para dibujar el tablero con bootones,
+        estan uno dentro de otro, el primero recorre las filas y el segundo
+        recorre las columnas. Despues mediante if y else se le añaden los labels
+        con la numeracion de filas y columnas y los botones negros y blancos que
+        seran las ccasillas del tablero.
+        */
         for (int fila = 0; fila < 9;fila++){
             for (int columna = 0; columna < 9; columna++){
                 String temp = new Character( (char)(65+columna) ).toString() + String.valueOf(8-fila);
@@ -44,6 +50,8 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                     addLabel(jPanel1, new Character( (char)(65+columna) ).toString(), Color.WHITE);
                 }
                 else {
+                    // La formula de abajo se utiliza para dibujar un tablero,
+                    // se va saltando un casilla.
                     if ((fila + columna)%2 == 0)
                         addButton(jPanel1, temp, Color.WHITE);
                     else
@@ -59,8 +67,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         temp.setBackground(color);
         temp.setSize(55, 55);
         temp.setText(name);
-        temp.setAlignmentX(CENTER_ALIGNMENT);
-        temp.setAlignmentY(TOP_ALIGNMENT);
+        temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         parent.add(temp);
     }
     
