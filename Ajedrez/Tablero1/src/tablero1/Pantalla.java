@@ -31,21 +31,32 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     private void crearTablero(){
         jPanel1.setLayout(new GridLayout(9, 9));
         
-        
+        for (int fila = 0; fila < 9;fila++){
+            for (int columna = 0; columna < 9; columna++){
+                String temp = new Character( (char)(65+columna) ).toString() + String.valueOf(8-fila) ;
+                if ((fila + columna)%2 == 0)
+                    addButton(jPanel1, temp, Color.WHITE);
+                else
+                    addButton(jPanel1, temp, Color.BLACK);
+                
+            } 
+        }
     }
     
     // Operaciones necesarias para añadir un Label.
-    private void AddLabel(Container parent, String name, Color color) {
+    private void addLabel(Container parent, String name, Color color) {
         JLabel temp = new JLabel(name);
         temp.setBackground(color);
+        temp.setSize(55, 55);
         temp.setText(name);
         parent.add(temp);
     }
     
     // Operaciones necesarias para añadir un Boton.
-    private void AddButton(Container parent, String name, Color color) {
+    private void addButton(Container parent, String name, Color color) {
         JButton temp = new JButton(name);
         temp.setBackground(color);
+        temp.setSize(55, 55);
         temp.setText("");
         temp.setActionCommand(name);
         temp.addActionListener(this);
@@ -88,11 +99,15 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(495, 495));
+        jPanel1.setMinimumSize(new java.awt.Dimension(495, 495));
+        jPanel1.setPreferredSize(new java.awt.Dimension(495, 495));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +229,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
