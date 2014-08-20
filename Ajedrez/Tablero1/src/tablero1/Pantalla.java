@@ -25,7 +25,10 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
      */
     public Pantalla() {
         initComponents();
+        limpiarTablero nueva = new limpiarTablero();
         crearTablero();
+        menu x = new menu();
+        grupoDeBotones y = new grupoDeBotones();
     }
 
     private void crearTablero(){
@@ -148,17 +151,17 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Boton1");
 
-        jButton3.setText("jButton2");
+        jButton3.setText("Boton2");
 
-        jButton4.setText("jButton2");
+        jButton4.setText("Boton3");
 
-        jButton5.setText("jButton2");
+        jButton5.setText("Boton6");
 
-        jButton6.setText("jButton2");
+        jButton6.setText("Boton4");
 
-        jButton7.setText("jButton2");
+        jButton7.setText("Boton5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -169,20 +172,21 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton5)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -335,8 +339,61 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 //        System.out.println(e.toString());
 //        System.out.println(e.getActionCommand());
-        jTextArea1.append(e.toString() + "\n");
-        
+//        jTextArea1.append(e.toString() + "\n");
+          jTextArea1.append("Esta es la casilla del tablero que ha sido seleccionada: " + e.getActionCommand() + "\n");
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public class limpiarTablero extends javax.swing.JFrame implements ActionListener{
+        
+        public limpiarTablero(){
+            jButton1.addActionListener(this);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jTextArea1.append("Esta es la accion del boton 'Limpiar tablero': " + e.getActionCommand() + "\n");
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    public class menu extends javax.swing.JFrame implements ActionListener{
+        
+        public menu(){
+            jMenuItem1.addActionListener(this);
+            jMenuItem2.addActionListener(this);
+            jMenuItem3.addActionListener(this);
+            jMenuItem4.addActionListener(this);
+            jMenuItem5.addActionListener(this);
+            jMenuItem6.addActionListener(this);
+            jMenuItem7.addActionListener(this);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jTextArea1.append("Esto es un elemento de menu: " + e.getActionCommand() + "\n");
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    public class grupoDeBotones extends javax.swing.JFrame implements ActionListener{
+        
+        public grupoDeBotones(){
+            jButton2.addActionListener(this);
+            jButton3.addActionListener(this);
+            jButton4.addActionListener(this);
+            jButton5.addActionListener(this);
+            jButton6.addActionListener(this);
+            jButton7.addActionListener(this);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jTextArea1.append("Esto es un boton: " + e.getActionCommand() + "\n");
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
     }
 }
