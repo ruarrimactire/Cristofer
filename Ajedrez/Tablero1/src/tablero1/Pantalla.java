@@ -39,23 +39,24 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         */
         for (int fila = 0; fila < 9;fila++){
             for (int columna = 0; columna < 9; columna++){
-                String temp = new Character( (char)(65+columna) ).toString() + String.valueOf(8-fila);
+                String temp1 = new Character( (char)(65+columna) ).toString();
+                String temp2 = String.valueOf(8-fila);
                 if( columna == 8 && fila == 8){
-                    
+                    addLabel(jPanel1, "", Color.WHITE);
                 }
                 else if (columna == 8){
-                    addLabel(jPanel1, String.valueOf(8-fila), Color.WHITE);
+                    addLabel(jPanel1, temp2, Color.WHITE);
                 }
                 else if (fila == 8){
-                    addLabel(jPanel1, new Character( (char)(65+columna) ).toString(), Color.WHITE);
+                    addLabel(jPanel1, temp1, Color.WHITE);
                 }
                 else {
                     // La formula de abajo se utiliza para dibujar un tablero,
                     // se va saltando un casilla.
                     if ((fila + columna)%2 == 0)
-                        addButton(jPanel1, temp, Color.WHITE);
+                        addButton(jPanel1, temp1 + temp2, Color.WHITE);
                     else
-                        addButton(jPanel1, temp, Color.BLACK);
+                        addButton(jPanel1, temp1 + temp2, Color.BLACK);
                 }                
             } 
         }
@@ -65,6 +66,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     private void addLabel(Container parent, String name, Color color) {
         JLabel temp = new JLabel(name);
         temp.setBackground(color);
+        temp.setOpaque(true);
         temp.setSize(55, 55);
         temp.setText(name);
         temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
@@ -321,6 +323,10 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+//        System.out.println(e.toString());
+//        System.out.println(e.getActionCommand());
+        jTextArea1.append(e.toString() + "\n");
+        
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
