@@ -61,7 +61,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                 else {
                     // La formula de abajo se utiliza para dibujar un tablero,
                     // se va saltando un casilla.
-                    addButton(jPanel1, temp1 + temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
+                    addLabel2(jPanel1, temp1 + temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
 //                    if ((fila + columna)%2 == 0)
 //                        addButton(jPanel1, temp1 + temp2, Color.WHITE);
 //                    else
@@ -82,14 +82,14 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         parent.add(temp);
     }
     
-    // Operaciones necesarias para añadir un Boton.
-    private void addButton(Container parent, String name, Color color) {
-        JButton temp = new JButton(name);
+    // Operaciones necesarias para añadir un Label.
+    private void addLabel2(Container parent, String name, Color color) {
+        JLabel temp = new JLabel(name);
         temp.setBackground(color);
+        temp.setOpaque(true);
         temp.setSize(55, 55);
         temp.setText("");
-        temp.setActionCommand(name);
-        temp.addActionListener(this);
+        temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         parent.add(temp);
     }
     
@@ -284,7 +284,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                     (el break ha de estar comentado para que esto funcione). */
 //                System.out.println(info.getName());
 //                jTextArea1.append(info.getName());   // solo se podria hacer esto si la textArea es de tipo static.
-                if ("Metal".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
