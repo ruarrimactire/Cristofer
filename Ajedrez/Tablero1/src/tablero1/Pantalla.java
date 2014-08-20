@@ -276,7 +276,11 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                /*  Para imprimir en la consola una lista de los estilos disponibles
+                    (el break ha de estar comentado para que esto funcione). */
+//                System.out.println(info.getName());
+//                jTextArea1.append(info.getName());   // solo se podria hacer esto si la textArea es de tipo static.
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
