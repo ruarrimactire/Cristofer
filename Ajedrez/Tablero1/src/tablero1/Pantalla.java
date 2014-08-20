@@ -42,21 +42,27 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                 String temp1 = new Character( (char)(65+columna) ).toString();
                 String temp2 = String.valueOf(8-fila);
                 if( columna == 8 && fila == 8){
-                    addLabel(jPanel1, "", Color.WHITE);
+//                    addLabel(jPanel1, "", Color.WHITE);
+                    
+                    // La manera de escribir un operador ternario: <text> ? <si es verdadero> : <si es falso>  (;)
+                    addLabel(jPanel1, "", ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else if (columna == 8){
-                    addLabel(jPanel1, temp2, Color.WHITE);
+//                    addLabel(jPanel1, temp2, Color.WHITE);
+                    addLabel(jPanel1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else if (fila == 8){
-                    addLabel(jPanel1, temp1, Color.WHITE);
+//                    addLabel(jPanel1, temp1, Color.WHITE);
+                    addLabel(jPanel1, temp1, ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else {
                     // La formula de abajo se utiliza para dibujar un tablero,
                     // se va saltando un casilla.
-                    if ((fila + columna)%2 == 0)
-                        addButton(jPanel1, temp1 + temp2, Color.WHITE);
-                    else
-                        addButton(jPanel1, temp1 + temp2, Color.BLACK);
+                    addButton(jPanel1, temp1 + temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
+//                    if ((fila + columna)%2 == 0)
+//                        addButton(jPanel1, temp1 + temp2, Color.WHITE);
+//                    else
+//                        addButton(jPanel1, temp1 + temp2, Color.BLACK);
                 }                
             } 
         }
