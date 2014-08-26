@@ -9,21 +9,33 @@ package tablero1;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.MediaTracker;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Risto
  */
-public class Pantalla extends javax.swing.JFrame implements ActionListener {
+public class Pantalla extends javax.swing.JFrame implements ActionListener, KeyListener, WindowFocusListener, MouseListener, MouseMotionListener {
 
+//    private windowChessBoard mainChessBoard;
+    private Image[][] imgPlayer = new Image[2][6];
     private String[] strRedPieces = {"redPawn.gif","redRock.gif","redKnight.gif","redBishop.gif","redQueen.gif","redKing.gif"};
     private String[] strBluePieces = {"bluePawn.gif","blueRock.gif","blueKnight.gif","blueBishop.gif","blueQueen.gif","blueKing.gif"};
+    private MediaTracker mt;
+    private objCreateAppletImage createImage;
 
     /**
      * Creates new form Pantalla
@@ -38,7 +50,6 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     private void crearTablero(){
         jPanel1.setLayout(new GridLayout(9, 9));
-
         /*
         Estos bucles for se utilizan para dibujar el tablero con bootones,
         estan uno dentro de otro, el primero recorre las filas y el segundo
@@ -63,11 +74,31 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                 else {
                     // La formula de abajo se utiliza para dibujar un tablero,
                     // se va saltando un casilla.
-                    addLabel2(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
+                    addLabel2(jPanel1, temp1 + temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
                 }                
             } 
         }
         
+        try {
+            
+            mt = new MediaTracker(jPanel1);
+            
+            for (int i = 0; i < 6; i++) {
+                imgPlayer[0][i] = createImage.getImage(this, "/images/" + strRedPieces[i],  5000);
+                imgPlayer[1][i] = createImage.getImage(this, "/images/" + strBluePieces[i], 5000);
+                mt.addImage(imgPlayer[0][i], 0);  // imagenes rojas
+                mt.addImage(imgPlayer[1][i], 0);  // imagenes azules
+            }
+            try {
+                mt.waitForID(0);
+            } catch (InterruptedException e) {}
+//            resetBoard();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Imposible cargar las imagenes.", "ERROR", JOptionPane.WARNING_MESSAGE);
+//            cmdNewGame.setEnabled(false);
+//            cmdSetNames.setEnabled(false);
+            e.printStackTrace();
+        }
         
     }
     
@@ -83,16 +114,9 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     }
     
     // Operaciones necesarias para añadir un Label.
-    private void addLabel2(Container parent, String columna, String fila, Color color) {
-        JLabel temp = new JLabel(columna+fila);
+    private void addLabel2(Container parent, String name, Color color) {
+        JLabel temp = new JLabel(name);
         temp.setBackground(color);
-        Icon icono = null;
-        if (fila.equals("2"))
-            icono = new ImageIcon(getClass().getResource("/images/" + strRedPieces[0]));
-            temp.setIcon(icono);
-        if (fila.equals("7"))
-            icono = new ImageIcon(getClass().getResource("/images/" + strBluePieces[0]));
-            temp.setIcon(icono);
         temp.setOpaque(true);
         temp.setSize(55, 55);
         temp.setText("");
@@ -349,6 +373,66 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 //        jTextArea1.append(e.toString() + "\n");
           jTextArea1.append("Esta es la casilla del tablero que ha sido seleccionada: " + e.getActionCommand() + "\n");
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowGainedFocus(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowLostFocus(WindowEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public class limpiarTablero extends javax.swing.JFrame implements ActionListener{
