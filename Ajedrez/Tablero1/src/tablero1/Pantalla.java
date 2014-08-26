@@ -11,6 +11,8 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -19,6 +21,9 @@ import javax.swing.JLabel;
  * @author Risto
  */
 public class Pantalla extends javax.swing.JFrame implements ActionListener {
+
+    private String[] strRedPieces = {"redPawn.gif","redRock.gif","redKnight.gif","redBishop.gif","redQueen.gif","redKing.gif"};
+    private String[] strBluePieces = {"bluePawn.gif","blueRock.gif","blueKnight.gif","blueBishop.gif","blueQueen.gif","blueKing.gif"};
 
     /**
      * Creates new form Pantalla
@@ -33,6 +38,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     private void crearTablero(){
         jPanel1.setLayout(new GridLayout(9, 9));
+
         /*
         Estos bucles for se utilizan para dibujar el tablero con bootones,
         estan uno dentro de otro, el primero recorre las filas y el segundo
@@ -45,33 +51,29 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                 String temp1 = new Character( (char)(65+columna) ).toString();
                 String temp2 = String.valueOf(8-fila);
                 if( columna == 8 && fila == 8){
-//                    addLabel(jPanel1, "", Color.WHITE);
-                    
-                    // La manera de escribir un operador ternario: <text> ? <si es verdadero> : <si es falso>  (;)
+                    // La manera de escribir un operador ternario: <test> ? <si es verdadero> : <si es falso>  (;)
                     addLabel(jPanel1, "", ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else if (columna == 8){
-//                    addLabel(jPanel1, temp2, Color.WHITE);
                     addLabel(jPanel1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else if (fila == 8){
-//                    addLabel(jPanel1, temp1, Color.WHITE);
                     addLabel(jPanel1, temp1, ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else {
-                    // La formula de abajo se utiliza para dibujar un tablero,
-                    // se va saltando un casilla.
-                    addButton(jPanel1, temp1 + temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
-//                    if ((fila + columna)%2 == 0)
-//                        addButton(jPanel1, temp1 + temp2, Color.WHITE);
-//                    else
-//                        addButton(jPanel1, temp1 + temp2, Color.BLACK);
+                    /* La formula de abajo se utiliza para dibujar un tablero, 
+                       que tenga las casillas adyacentes (sea en sentido 
+                       orizontal que vertical) con colores alternados.  */
+                    addButton(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
                 }                
             } 
         }
+        
+        
     }
     
-    // Operaciones necesarias para añadir un Label.
+    // Operaciones necesarias para añadir un Label para la indicación
+    // de la columna o fila correspondiente a cada casilla del tablero.
     private void addLabel(Container parent, String name, Color color) {
         JLabel temp = new JLabel(name);
         temp.setBackground(color);
@@ -83,12 +85,52 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     }
     
     // Operaciones necesarias para añadir un Boton.
-    private void addButton(Container parent, String name, Color color) {
-        JButton temp = new JButton(name);
+    private void addButton(Container parent, String columna, String fila, Color color) {
+        JButton temp = new JButton(columna+fila);
         temp.setBackground(color);
+        
+        // se ponen los iconos de los peones en las casillas correspondientes.
+        if (fila.equals("1")) {
+            if ( columna.equals("A") || columna.equals("H") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[1])) );
+            if ( columna.equals("B") || columna.equals("G") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[2])) );
+            if ( columna.equals("C") || columna.equals("F") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[3])) );
+            if ( columna.equals("D") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[4])) );
+            if ( columna.equals("E") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[5])) );
+        }
+        if (fila.equals("2")) {
+            temp.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[0])));
+        }
+        if (fila.equals("7")) {
+            temp.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[0])));
+        }
+        if (fila.equals("8")) {
+            if ( columna.equals("A") || columna.equals("H") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[1])) );
+            if ( columna.equals("B") || columna.equals("G") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[2])) );
+            if ( columna.equals("C") || columna.equals("F") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[3])) );
+            if ( columna.equals("D") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[4])) );
+            if ( columna.equals("E") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[5])) );
+        }
+        
+//        // solo para depuración
+//        try {
+//            System.out.println(temp.getIcon().toString());   
+//        } catch (NullPointerException e){ }
+
+        temp.setOpaque(true);
         temp.setSize(55, 55);
+        temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         temp.setText("");
-        temp.setActionCommand(name);
+        temp.setActionCommand(columna+fila);
         temp.addActionListener(this);
         parent.add(temp);
     }
@@ -284,7 +326,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                     (el break ha de estar comentado para que esto funcione). */
 //                System.out.println(info.getName());
 //                jTextArea1.append(info.getName());   // solo se podria hacer esto si la textArea es de tipo static.
-                if ("Metal".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -335,15 +377,24 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
+    /* Punto en el cual se redefinen (@Override) las acciones a realizar después 
+       de presionar uno de los eventuales botones de los cuales está formado el tablero */
     @Override
     public void actionPerformed(ActionEvent e) {
 //        System.out.println(e.toString());
 //        System.out.println(e.getActionCommand());
 //        jTextArea1.append(e.toString() + "\n");
-          jTextArea1.append("Esta es la casilla del tablero que ha sido seleccionada: " + e.getActionCommand() + "\n");
+        String pieza = e.toString().split(" ")[2].split(",")[11];
+        String []temp = pieza.split("/");
+        pieza = temp[temp.length-1].replaceAll(".gif", "");
+        if (pieza.contains("defaultIcon")) pieza= "";
+        jTextArea1.append("Casilla: " + e.getActionCommand() );
+        jTextArea1.append(" Que contiene: " + pieza + "\n");
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /* Clase interna para redefinir (@Override) las acciones a realizar después 
+       de presionar el boton "Limpiar Tablero" */
     public class limpiarTablero extends javax.swing.JFrame implements ActionListener{
         
         public limpiarTablero(){
@@ -358,6 +409,8 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         
     }
     
+    /* Clase interna para redefinir (@Override) las acciones a realizar después 
+       de elegir un elemento de menu */
     public class menu extends javax.swing.JFrame implements ActionListener{
         
         public menu(){
@@ -378,6 +431,8 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         
     }
     
+    /* Clase interna para redefinir (@Override) las acciones a realizar después 
+       de presionar uno de los botones por debajo de la textArea */
     public class grupoDeBotones extends javax.swing.JFrame implements ActionListener{
         
         public grupoDeBotones(){
