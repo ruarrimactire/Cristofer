@@ -25,7 +25,10 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
      */
     public Pantalla() {
         initComponents();
+        limpiarTablero nueva = new limpiarTablero();
         crearTablero();
+        menu x = new menu();
+        grupoDeBotones y = new grupoDeBotones();
     }
 
     private void crearTablero(){
@@ -39,23 +42,30 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         */
         for (int fila = 0; fila < 9;fila++){
             for (int columna = 0; columna < 9; columna++){
-                String temp = new Character( (char)(65+columna) ).toString() + String.valueOf(8-fila);
+                String temp1 = new Character( (char)(65+columna) ).toString();
+                String temp2 = String.valueOf(8-fila);
                 if( columna == 8 && fila == 8){
+//                    addLabel(jPanel1, "", Color.WHITE);
                     
+                    // La manera de escribir un operador ternario: <text> ? <si es verdadero> : <si es falso>  (;)
+                    addLabel(jPanel1, "", ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else if (columna == 8){
-                    addLabel(jPanel1, String.valueOf(8-fila), Color.WHITE);
+//                    addLabel(jPanel1, temp2, Color.WHITE);
+                    addLabel(jPanel1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else if (fila == 8){
-                    addLabel(jPanel1, new Character( (char)(65+columna) ).toString(), Color.WHITE);
+//                    addLabel(jPanel1, temp1, Color.WHITE);
+                    addLabel(jPanel1, temp1, ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else {
                     // La formula de abajo se utiliza para dibujar un tablero,
                     // se va saltando un casilla.
-                    if ((fila + columna)%2 == 0)
-                        addButton(jPanel1, temp, Color.WHITE);
-                    else
-                        addButton(jPanel1, temp, Color.BLACK);
+                    addLabel2(jPanel1, temp1 + temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
+//                    if ((fila + columna)%2 == 0)
+//                        addButton(jPanel1, temp1 + temp2, Color.WHITE);
+//                    else
+//                        addButton(jPanel1, temp1 + temp2, Color.BLACK);
                 }                
             } 
         }
@@ -65,20 +75,21 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     private void addLabel(Container parent, String name, Color color) {
         JLabel temp = new JLabel(name);
         temp.setBackground(color);
+        temp.setOpaque(true);
         temp.setSize(55, 55);
         temp.setText(name);
         temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         parent.add(temp);
     }
     
-    // Operaciones necesarias para añadir un Boton.
-    private void addButton(Container parent, String name, Color color) {
-        JButton temp = new JButton(name);
+    // Operaciones necesarias para añadir un Label.
+    private void addLabel2(Container parent, String name, Color color) {
+        JLabel temp = new JLabel(name);
         temp.setBackground(color);
+        temp.setOpaque(true);
         temp.setSize(55, 55);
         temp.setText("");
-        temp.setActionCommand(name);
-        temp.addActionListener(this);
+        temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         parent.add(temp);
     }
     
@@ -140,17 +151,17 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Boton1");
 
-        jButton3.setText("jButton2");
+        jButton3.setText("Boton2");
 
-        jButton4.setText("jButton2");
+        jButton4.setText("Boton3");
 
-        jButton5.setText("jButton2");
+        jButton5.setText("Boton6");
 
-        jButton6.setText("jButton2");
+        jButton6.setText("Boton4");
 
-        jButton7.setText("jButton2");
+        jButton7.setText("Boton5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -161,20 +172,21 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton5)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -268,6 +280,10 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                /*  Para imprimir en la consola una lista de los estilos disponibles
+                    (el break ha de estar comentado para que esto funcione). */
+//                System.out.println(info.getName());
+//                jTextArea1.append(info.getName());   // solo se podria hacer esto si la textArea es de tipo static.
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -321,6 +337,63 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+//        System.out.println(e.toString());
+//        System.out.println(e.getActionCommand());
+//        jTextArea1.append(e.toString() + "\n");
+          jTextArea1.append("Esta es la casilla del tablero que ha sido seleccionada: " + e.getActionCommand() + "\n");
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public class limpiarTablero extends javax.swing.JFrame implements ActionListener{
+        
+        public limpiarTablero(){
+            jButton1.addActionListener(this);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jTextArea1.append("Esta es la accion del boton 'Limpiar tablero': " + e.getActionCommand() + "\n");
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    public class menu extends javax.swing.JFrame implements ActionListener{
+        
+        public menu(){
+            jMenuItem1.addActionListener(this);
+            jMenuItem2.addActionListener(this);
+            jMenuItem3.addActionListener(this);
+            jMenuItem4.addActionListener(this);
+            jMenuItem5.addActionListener(this);
+            jMenuItem6.addActionListener(this);
+            jMenuItem7.addActionListener(this);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jTextArea1.append("Esto es un elemento de menu: " + e.getActionCommand() + "\n");
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    public class grupoDeBotones extends javax.swing.JFrame implements ActionListener{
+        
+        public grupoDeBotones(){
+            jButton2.addActionListener(this);
+            jButton3.addActionListener(this);
+            jButton4.addActionListener(this);
+            jButton5.addActionListener(this);
+            jButton6.addActionListener(this);
+            jButton7.addActionListener(this);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jTextArea1.append("Esto es un boton: " + e.getActionCommand() + "\n");
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
     }
 }
