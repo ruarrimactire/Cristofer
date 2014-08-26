@@ -22,7 +22,7 @@ import javax.swing.JLabel;
  *
  * @author Risto
  */
-public class Pantalla extends javax.swing.JFrame implements ActionListener, MouseListener {
+public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     private String[] strRedPieces = {"redPawn.gif","redRock.gif","redKnight.gif","redBishop.gif","redQueen.gif","redKing.gif"};
     private String[] strBluePieces = {"bluePawn.gif","blueRock.gif","blueKnight.gif","blueBishop.gif","blueQueen.gif","blueKing.gif"};
@@ -66,7 +66,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener, Mous
                     /* La formula de abajo se utiliza para dibujar un tablero, 
                        que tenga las casillas adyacentes (sea en sentido 
                        orizontal que vertical) con colores alternados.  */
-                    addLabel2(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
+                    addButton(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
                 }                
             } 
         }
@@ -86,11 +86,11 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener, Mous
         parent.add(temp);
     }
     
-    // Operaciones necesarias para añadir un Label para dibujar el tablero.
-    private void addLabel2(Container parent, String columna, String fila, Color color) {
-        JLabel temp = new JLabel(columna+fila);
+    // Operaciones necesarias para añadir un Boton.
+    private void addButton(Container parent, String columna, String fila, Color color) {
+        JButton temp = new JButton(columna+fila);
         temp.setBackground(color);
-
+        
         // se ponen los iconos de los peones en las casillas correspondientes.
         if (fila.equals("1")) {
             if ( columna.equals("A") || columna.equals("H") ) 
@@ -132,7 +132,8 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener, Mous
         temp.setSize(55, 55);
         temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         temp.setText("");
-        temp.addMouseListener(this);
+        temp.setActionCommand(columna+fila);
+        temp.addActionListener(this);
         parent.add(temp);
     }
     
@@ -385,41 +386,12 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener, Mous
 //        System.out.println(e.toString());
 //        System.out.println(e.getActionCommand());
 //        jTextArea1.append(e.toString() + "\n");
-          jTextArea1.append("Esta es el boton del tablero que ha sido seleccionado: " + e.getActionCommand() + "\n");
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        String []temp1 = e.toString().split(" ");
-        String []temp2 = temp1[2].split(",");
-        String []temp3 = temp2[11].split("/");
-//        temp3[11].replaceAll("^.*/", "").replaceAll("/.gif", "") 
-
-//        for (String nn : temp3)
-            jTextArea1.append("Casilla: " + (char)(((Integer.parseInt(temp2[1])/55))+65)  );
-            jTextArea1.append("" + (8-(Integer.parseInt(temp2[2])/55)) );
-            jTextArea1.append(" pieza: " + temp3[temp3.length-1].replaceAll(".gif", "") + "\n");
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
+        String pieza = e.toString().split(" ")[2].split(",")[11];
+        String []temp = pieza.split("/");
+        pieza = temp[temp.length-1].replaceAll(".gif", "");
+        if (pieza.contains("defaultIcon")) pieza= "";
+        jTextArea1.append("Casilla: " + e.getActionCommand() );
+        jTextArea1.append(" Que contiene: " + pieza + "\n");
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
