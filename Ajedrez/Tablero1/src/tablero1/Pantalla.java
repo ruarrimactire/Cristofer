@@ -24,6 +24,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     private String[] strRedPieces = {"redPawn.gif","redRock.gif","redKnight.gif","redBishop.gif","redQueen.gif","redKing.gif"};
     private String[] strBluePieces = {"bluePawn.gif","blueRock.gif","blueKnight.gif","blueBishop.gif","blueQueen.gif","blueKing.gif"};
+    JButton [][]caselle = new JButton[8][8];
 
     /**
      * Creates new form Pantalla
@@ -34,6 +35,14 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         crearTablero();
         menu x = new menu();
         grupoDeBotones y = new grupoDeBotones();
+
+//        for(JButton[] nn : caselle)
+//            for(JButton nn2 : nn){
+////                jTextArea1.append( nn2.toString() + "\n" );    
+//                String pieza = extractIconFromString(nn2.toString().split(",")[12]);
+//                jTextArea1.append( "Casilla: " + nn2.getActionCommand() + " Que contiene: " + pieza  + "\n" );
+//            }
+        
     }
 
     private void crearTablero(){
@@ -45,7 +54,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         recorre las columnas. Despues mediante if y else se le añaden los labels
         con la numeracion de filas y columnas y los botones negros y blancos que
         seran las ccasillas del tablero.
-        */
+        */        
         for (int fila = 0; fila < 9;fila++){
             for (int columna = 0; columna < 9; columna++){
                 String temp1 = new Character( (char)(65+columna) ).toString();
@@ -64,7 +73,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                     /* La formula de abajo se utiliza para dibujar un tablero, 
                        que tenga las casillas adyacentes (sea en sentido 
                        orizontal que vertical) con colores alternados.  */
-                    addButton(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
+                    caselle[fila][columna] = addButton(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
                 }                
             } 
         }
@@ -85,7 +94,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     }
     
     // Operaciones necesarias para añadir un Boton.
-    private void addButton(Container parent, String columna, String fila, Color color) {
+    private JButton addButton(Container parent, String columna, String fila, Color color) {
         JButton temp = new JButton(columna+fila);
         temp.setBackground(color);
         
@@ -133,6 +142,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         temp.setActionCommand(columna+fila);
         temp.addActionListener(this);
         parent.add(temp);
+        return temp;
     }
     
     /**
@@ -381,16 +391,16 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
        de presionar uno de los eventuales botones de los cuales está formado el tablero */
     @Override
     public void actionPerformed(ActionEvent e) {
-//        System.out.println(e.toString());
-//        System.out.println(e.getActionCommand());
-//        jTextArea1.append(e.toString() + "\n");
-        String pieza = e.toString().split(" ")[2].split(",")[11];
-        String []temp = pieza.split("/");
-        pieza = temp[temp.length-1].replaceAll(".gif", "");
-        if (pieza.contains("defaultIcon")) pieza= "";
-        jTextArea1.append("Casilla: " + e.getActionCommand() );
-        jTextArea1.append(" Que contiene: " + pieza + "\n");
+        String pieza = extractIconFromString(e.toString().split(" ")[2].split(",")[11]);
+        jTextArea1.append( "Casilla: " + e.getActionCommand() + " Que contiene: " + pieza  + "\n" );
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    String extractIconFromString (String icon){
+        String []temp = icon.split("/");
+        String pieza = temp[temp.length-1].replace(".gif", "");
+        if (pieza.contains("defaultIcon")) pieza= "";
+        return pieza;
     }
     
     /* Clase interna para redefinir (@Override) las acciones a realizar después 
