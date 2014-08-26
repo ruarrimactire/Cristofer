@@ -11,6 +11,8 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +22,7 @@ import javax.swing.JLabel;
  *
  * @author Risto
  */
-public class Pantalla extends javax.swing.JFrame {
+public class Pantalla extends javax.swing.JFrame implements ActionListener, MouseListener {
 
     private String[] strRedPieces = {"redPawn.gif","redRock.gif","redKnight.gif","redBishop.gif","redQueen.gif","redKing.gif"};
     private String[] strBluePieces = {"bluePawn.gif","blueRock.gif","blueKnight.gif","blueBishop.gif","blueQueen.gif","blueKing.gif"};
@@ -88,24 +90,49 @@ public class Pantalla extends javax.swing.JFrame {
     private void addLabel2(Container parent, String columna, String fila, Color color) {
         JLabel temp = new JLabel(columna+fila);
         temp.setBackground(color);
-        Icon icono = null;
+
         // se ponen los iconos de los peones en las casillas correspondientes.
-        if (fila.equals("2")) {
-            icono = new ImageIcon(getClass().getResource("/images/" + strRedPieces[0]));
-            temp.setIcon(icono);
+        if (fila.equals("1")) {
+            if ( columna.equals("A") || columna.equals("H") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[1])) );
+            if ( columna.equals("B") || columna.equals("G") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[2])) );
+            if ( columna.equals("C") || columna.equals("F") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[3])) );
+            if ( columna.equals("D") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[4])) );
+            if ( columna.equals("E") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strRedPieces[5])) );
         }
-        if (fila.equals("7")) 
+        if (fila.equals("2")) {
+            temp.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[0])));
+        }
+        if (fila.equals("7")) {
             temp.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[0])));
+        }
+        if (fila.equals("8")) {
+            if ( columna.equals("A") || columna.equals("H") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[1])) );
+            if ( columna.equals("B") || columna.equals("G") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[2])) );
+            if ( columna.equals("C") || columna.equals("F") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[3])) );
+            if ( columna.equals("D") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[4])) );
+            if ( columna.equals("E") ) 
+                temp.setIcon( new ImageIcon(getClass().getResource("/images/" + strBluePieces[5])) );
+        }
         
-        // solo para depuración
-        try {
-            System.out.println(temp.getIcon().toString());   
-        } catch (NullPointerException e){ }
-        
+//        // solo para depuración
+//        try {
+//            System.out.println(temp.getIcon().toString());   
+//        } catch (NullPointerException e){ }
+
         temp.setOpaque(true);
         temp.setSize(55, 55);
-        temp.setText("");
         temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        temp.setText("");
+        temp.addMouseListener(this);
         parent.add(temp);
     }
     
@@ -351,6 +378,50 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
+    /* Punto en el cual se redefinen (@Override) las acciones a realizar después 
+       de presionar uno de los eventuales botones de los cuales está formado el tablero */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+//        System.out.println(e.toString());
+//        System.out.println(e.getActionCommand());
+//        jTextArea1.append(e.toString() + "\n");
+          jTextArea1.append("Esta es el boton del tablero que ha sido seleccionado: " + e.getActionCommand() + "\n");
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        String []temp1 = e.toString().split(" ");
+        String []temp2 = temp1[2].split(",");
+        String []temp3 = temp2[11].split("/");
+//        temp3[11].replaceAll("^.*/", "").replaceAll("/.gif", "") 
+
+//        for (String nn : temp3)
+            jTextArea1.append("Casilla: " + (char)(((Integer.parseInt(temp2[1])/55))+65)  );
+            jTextArea1.append("" + (8-(Integer.parseInt(temp2[2])/55)) );
+            jTextArea1.append(" pieza: " + temp3[temp3.length-1].replaceAll(".gif", "") + "\n");
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /* Clase interna para redefinir (@Override) las acciones a realizar después 
        de presionar el boton "Limpiar Tablero" */
