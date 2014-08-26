@@ -20,7 +20,7 @@ import javax.swing.JLabel;
  *
  * @author Risto
  */
-public class Pantalla extends javax.swing.JFrame implements ActionListener {
+public class Pantalla extends javax.swing.JFrame {
 
     private String[] strRedPieces = {"redPawn.gif","redRock.gif","redKnight.gif","redBishop.gif","redQueen.gif","redKing.gif"};
     private String[] strBluePieces = {"bluePawn.gif","blueRock.gif","blueKnight.gif","blueBishop.gif","blueQueen.gif","blueKing.gif"};
@@ -51,7 +51,7 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                 String temp1 = new Character( (char)(65+columna) ).toString();
                 String temp2 = String.valueOf(8-fila);
                 if( columna == 8 && fila == 8){
-                    // La manera de escribir un operador ternario: <text> ? <si es verdadero> : <si es falso>  (;)
+                    // La manera de escribir un operador ternario: <test> ? <si es verdadero> : <si es falso>  (;)
                     addLabel(jPanel1, "", ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else if (columna == 8){
@@ -61,8 +61,9 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
                     addLabel(jPanel1, temp1, ((fila + columna)%2 == 0) ? Color.WHITE : Color.GRAY  );
                 }
                 else {
-                    // La formula de abajo se utiliza para dibujar un tablero,
-                    // se va saltando un casilla.
+                    /* La formula de abajo se utiliza para dibujar un tablero, 
+                       que tenga las casillas adyacentes (sea en sentido 
+                       orizontal que vertical) con colores alternados.  */
                     addLabel2(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
                 }                
             } 
@@ -71,7 +72,8 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         
     }
     
-    // Operaciones necesarias para añadir un Label.
+    // Operaciones necesarias para añadir un Label para la indicación
+    // de la columna o fila correspondiente a cada casilla del tablero.
     private void addLabel(Container parent, String name, Color color) {
         JLabel temp = new JLabel(name);
         temp.setBackground(color);
@@ -82,17 +84,24 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         parent.add(temp);
     }
     
-    // Operaciones necesarias para añadir un Label.
+    // Operaciones necesarias para añadir un Label para dibujar el tablero.
     private void addLabel2(Container parent, String columna, String fila, Color color) {
         JLabel temp = new JLabel(columna+fila);
         temp.setBackground(color);
         Icon icono = null;
-        if (fila.equals("2"))
+        // se ponen los iconos de los peones en las casillas correspondientes.
+        if (fila.equals("2")) {
             icono = new ImageIcon(getClass().getResource("/images/" + strRedPieces[0]));
             temp.setIcon(icono);
-        if (fila.equals("7"))
-            icono = new ImageIcon(getClass().getResource("/images/" + strBluePieces[0]));
-            temp.setIcon(icono);
+        }
+        if (fila.equals("7")) 
+            temp.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[0])));
+        
+        // solo para depuración
+        try {
+            System.out.println(temp.getIcon().toString());   
+        } catch (NullPointerException e){ }
+        
         temp.setOpaque(true);
         temp.setSize(55, 55);
         temp.setText("");
@@ -342,15 +351,9 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-//        System.out.println(e.toString());
-//        System.out.println(e.getActionCommand());
-//        jTextArea1.append(e.toString() + "\n");
-          jTextArea1.append("Esta es la casilla del tablero que ha sido seleccionada: " + e.getActionCommand() + "\n");
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
+    /* Clase interna para redefinir (@Override) las acciones a realizar después 
+       de presionar el boton "Limpiar Tablero" */
     public class limpiarTablero extends javax.swing.JFrame implements ActionListener{
         
         public limpiarTablero(){
@@ -365,6 +368,8 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         
     }
     
+    /* Clase interna para redefinir (@Override) las acciones a realizar después 
+       de elegir un elemento de menu */
     public class menu extends javax.swing.JFrame implements ActionListener{
         
         public menu(){
@@ -385,6 +390,8 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         
     }
     
+    /* Clase interna para redefinir (@Override) las acciones a realizar después 
+       de presionar uno de los botones por debajo de la textArea */
     public class grupoDeBotones extends javax.swing.JFrame implements ActionListener{
         
         public grupoDeBotones(){
