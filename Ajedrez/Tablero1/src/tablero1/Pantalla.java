@@ -391,18 +391,38 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener, Mous
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        String []temp1 = e.toString().split(" ");
-        String []temp2 = temp1[2].split(",");
-        String []temp3 = temp2[11].split("/");
-//        temp3[11].replaceAll("^.*/", "").replaceAll("/.gif", "") 
+        jTextArea1.append( positionAndPieceFromString(e.toString()) );
 
-//        for (String nn : temp3)
-            jTextArea1.append("Casilla: " + (char)(((Integer.parseInt(temp2[1])/55))+65)  );
-            jTextArea1.append("" + (8-(Integer.parseInt(temp2[2])/55)) );
-            jTextArea1.append(" pieza: " + temp3[temp3.length-1].replaceAll(".gif", "") + "\n");
+//        String []temp1 = e.toString().split(" ");
+//        String []temp2 = temp1[2].split(",");
+//        String []temp3 = temp2[11].split("/");
+////        temp3[11].replaceAll("^.*/", "").replaceAll("/.gif", "") 
+//
+////        for (String nn : temp3)
+//            jTextArea1.append("Casilla: " + (char)(((Integer.parseInt(temp2[1])/55))+65)  );
+//            jTextArea1.append("" + (8-(Integer.parseInt(temp2[2])/55)) );
+//            jTextArea1.append(" pieza: " + temp3[temp3.length-1].replaceAll(".gif", "") + "\n");
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    String positionAndPieceFromString (String original){
+        String []temp1 = original.split(" ");
+        String []temp2 = temp1[2].split(",");
+        String result = "Casilla: " + (char)(((Integer.parseInt(temp2[1])/55))+65) + (8-(Integer.parseInt(temp2[2])/55)) + " ";
+        for(String element : temp2)
+            if ( element.contains("defaultIcon=") )
+                result += "Que contiene: " + filenameFromPath(element) + "\n";
+        return result;
+    }
+    
+    String filenameFromPath(String original){
+        String []temp = original.split("/");
+        if(temp[temp.length-1].contains("defaultIcon="))
+            return " ";
+        else
+            return temp[temp.length-1].replace(".gif", "");
+    }
+    
     @Override
     public void mousePressed(MouseEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
