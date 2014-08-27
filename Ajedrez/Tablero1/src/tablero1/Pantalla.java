@@ -39,7 +39,9 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
         para que funcione sea con un actionEvent.toString(), sea con JButton.toString()*/
 //        for(JButton []nn : casillas)
 //            for (JButton nn2 : nn)
-//                System.out.println("Casilla: " + nn2.getActionCommand() + " que contiene: " + conseguirNombrePieza(nn2.toString()));
+//                System.out.println(String.valueOf(nn2.getActionCommand().charAt(0)) + "  " +
+//                        String.valueOf(nn2.getActionCommand().charAt(1)) + "  " +
+//                        conseguirNombrePieza(nn2.toString()) );
     }
 
     private void crearTablero(){
@@ -401,18 +403,13 @@ public class Pantalla extends javax.swing.JFrame implements ActionListener {
     }
 
     String conseguirNombrePieza(String evento){
-        String []temp1 = evento.split(" ");
-        String []temp2;
-        try{
-            temp2 = temp1[2].split(",");
-        }catch(java.lang.ArrayIndexOutOfBoundsException e){
-            temp2 = evento.split(",");
-        }
-        String []temp3 = null;
-        for(String nn : temp2)
+        String []temp1 = evento.split("[ ,]");
+        String []temp2 = null;
+        for(String nn : temp1){
             if(nn.contains("defaultIcon="))
-                temp3 = nn.split("/");
-        String pieza = temp3[temp3.length-1];
+                temp2 = nn.split("/");
+        }
+        String pieza = temp2[temp2.length-1];
         if (pieza.contains("defaultIcon="))
             pieza = "";
         else
