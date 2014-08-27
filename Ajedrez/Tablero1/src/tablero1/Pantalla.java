@@ -20,20 +20,27 @@ import javax.swing.JLabel;
  *
  * @author Risto
  */
-public class Pantalla extends javax.swing.JFrame {
+public class Pantalla extends javax.swing.JFrame implements ActionListener {
 
     private String[] strRedPieces = {"redPawn.gif","redRock.gif","redKnight.gif","redBishop.gif","redQueen.gif","redKing.gif"};
     private String[] strBluePieces = {"bluePawn.gif","blueRock.gif","blueKnight.gif","blueBishop.gif","blueQueen.gif","blueKing.gif"};
-
+    JButton [][] casillas = new JButton [8][8];
     /**
      * Creates new form Pantalla
      */
     public Pantalla() {
         initComponents();
-        limpiarTablero nueva = new limpiarTablero();
+        limpiarTablero botonLimpiar = new limpiarTablero();
+        menu elementosMenu = new menu();
+        grupoDeBotones botonesVarios = new grupoDeBotones();
         crearTablero();
-        menu x = new menu();
-        grupoDeBotones y = new grupoDeBotones();
+        /* bucle for con arrays
+        Esto sirve para depuracion y para hacer el test del metodo conseguirNombrePieza,
+        para que funcione sea con un actionEvent.toString(), sea con JButton.toString()*/
+//        for(JButton []nn : casillas)
+//            for (JButton nn2 : nn)
+//                System.out.println("Casilla: " + nn2.getActionCommand() + " que contiene: " + conseguirNombrePieza(nn2.toString()));
+
     }
 
     private void crearTablero(){
@@ -64,12 +71,10 @@ public class Pantalla extends javax.swing.JFrame {
                     /* La formula de abajo se utiliza para dibujar un tablero, 
                        que tenga las casillas adyacentes (sea en sentido 
                        orizontal que vertical) con colores alternados.  */
-                    addLabel2(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
-                }                
-            } 
+                    casillas[fila][columna] = addButton(jPanel1, temp1, temp2, ((fila + columna)%2 == 0) ? Color.WHITE : Color.BLACK  );
+                }
+            }
         }
-        
-        
     }
     
     // Operaciones necesarias para añadir un Label para la indicación
@@ -85,28 +90,68 @@ public class Pantalla extends javax.swing.JFrame {
     }
     
     // Operaciones necesarias para añadir un Label para dibujar el tablero.
-    private void addLabel2(Container parent, String columna, String fila, Color color) {
-        JLabel temp = new JLabel(columna+fila);
+    private JButton addButton(Container parent, String columna, String fila, Color color) {
+        JButton temp = new JButton(columna+fila);
         temp.setBackground(color);
-        Icon icono = null;
-        // se ponen los iconos de los peones en las casillas correspondientes.
-        if (fila.equals("2")) {
-            icono = new ImageIcon(getClass().getResource("/images/" + strRedPieces[0]));
-            temp.setIcon(icono);
-        }
-        if (fila.equals("7")) 
-            temp.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[0])));
-        
-        // solo para depuración
-        try {
-            System.out.println(temp.getIcon().toString());   
-        } catch (NullPointerException e){ }
-        
+        colocarPiezas(columna, fila, temp);
         temp.setOpaque(true);
         temp.setSize(55, 55);
         temp.setText("");
         temp.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        temp.setActionCommand(columna + fila);
+        temp.addActionListener(this);
         parent.add(temp);
+        return temp;
+    }
+    
+    private void colocarPiezas(String columna, String fila, JButton casilla){
+
+        // se ponen los iconos de los peones en las casillas correspondientes.
+        if (fila.equals("7")) {
+            casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[0])));
+        }
+        if (fila.equals("2")) 
+            casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[0])));
+        if (fila.equals("8")) {
+            // se ponen los iconos de las torres en las casillas correspondientes.
+            if (columna.equals("A") || columna.equals("H"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[1])));
+            // se ponen los iconos de las caballos en las casillas correspondientes.
+            if (columna.equals("B") || columna.equals("G"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[2])));
+            // se ponen los iconos de las Alfiles en las casillas correspondientes.
+            if (columna.equals("C") || columna.equals("F"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[3])));
+            // se ponen los iconos de las Reina en las casillas correspondientes.
+            if (columna.equals("D"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[4])));
+            // se ponen los iconos de las Rey en las casillas correspondientes.
+            if (columna.equals("E"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strRedPieces[5])));
+        }
+        if (fila.equals("1")){
+            // se ponen los iconos de las torres en las casillas correspondientes.
+            if (columna.equals("A") || columna.equals("H"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[1])));
+            // se ponen los iconos de las caballos en las casillas correspondientes.
+            if (columna.equals("B") || columna.equals("G"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[2])));
+            // se ponen los iconos de las Alfiles en las casillas correspondientes.
+            if (columna.equals("C") || columna.equals("F"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[3])));
+            // se ponen los iconos de las Reina en las casillas correspondientes.
+            if (columna.equals("D"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[4])));
+            // se ponen los iconos de las Rey en las casillas correspondientes.
+            if (columna.equals("E"))
+                casilla.setIcon(new ImageIcon(getClass().getResource("/images/" + strBluePieces[5])));
+        }
+        
+//        // solo para depuración
+//        try {
+//            System.out.println(casilla.getIcon().toString());   
+//        } catch (NullPointerException e){ }
+        
     }
     
     /**
@@ -351,6 +396,30 @@ public class Pantalla extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        jTextArea1.append("casilla: " + e.getActionCommand() + " que contiene: " + conseguirNombrePieza(e.toString()) + "\n" );
+    }
+
+    String conseguirNombrePieza(String evento){
+        String []temp1 = evento.split(" ");
+        String []temp2;
+        try{
+            temp2 = temp1[2].split(",");
+        }catch(java.lang.ArrayIndexOutOfBoundsException e){
+            temp2 = evento.split(",");
+        }
+        String []temp3 = null;
+        for(String nn : temp2)
+            if(nn.contains("defaultIcon="))
+                temp3 = nn.split("/");
+        String pieza = temp3[temp3.length-1];
+        if (pieza.contains("defaultIcon="))
+            pieza = "";
+        else
+            pieza = pieza.replace(".gif", "");
+        return pieza;
+    }
     
     /* Clase interna para redefinir (@Override) las acciones a realizar después 
        de presionar el boton "Limpiar Tablero" */
